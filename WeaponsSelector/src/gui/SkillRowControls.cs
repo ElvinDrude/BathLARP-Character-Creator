@@ -32,7 +32,7 @@ namespace WeaponsForm
                 Tag = this,
             };
 
-            // Gather and list all possible weapon skills in the combobox
+            // Gather and list all possible skills in the combobox
             //var skillTypesList = (skillTableLayoutPanel.FindForm() as WeaponsForm).JsonSkillReader.GetWeapons();
             var skillTypesList = GetSkillTypesList(skillTableLayoutPanel);
             string[] weaponsStringList = skillTypesList.ToArray().Select(weap => weap.Name).ToArray();

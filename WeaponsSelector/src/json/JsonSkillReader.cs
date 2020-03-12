@@ -24,6 +24,11 @@ namespace WeaponsForm
             allSkills = AllSkills.FromJson(fileContentsString);            
         }
 
+        internal SkillType GetPhysicalMentalType(string physicalMentalType)
+        {
+            return allSkills.SkillCategories.Find(x => x.Category == Constants.PhysicalMental).Skills.Find(x => x.Name == physicalMentalType);
+        }
+
         internal SkillType GetArmourType(string armourName)
         {
             return allSkills.SkillCategories.Find(x => x.Category == Constants.Armour).Skills.Find(x => x.Name == armourName);
@@ -84,12 +89,12 @@ namespace WeaponsForm
 
     public enum PurchaseType
     {
-        Levels,         //e.g. 1H weapons have Prof, Spec, etc.
-        Integer,        //e.g. Willpower
-        Threshold,      //e.g. Life
-        Once,           //e.g. Ambidex
-        CostPlusLevel,  //e.g. Talisman
-        CostTimesLevel  //e.g. Spells
+        Levels,                //e.g. 1H weapons have Prof, Spec, etc.
+        Threshold,             //e.g. Life
+        Once,                  //e.g. Ambidex
+        CostPlusLevel,         //e.g. Talisman
+        CostTimesLevel,        //e.g. Willpower
+        CostTimesLevelPlusOne  //e.g. Spells
     }
 
 

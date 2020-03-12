@@ -1,9 +1,11 @@
 ﻿// Lines beginning with '//' won't be read by the application
 // "Purchase type" is one of the following possible values:
-//  "levels"
-//  "integer"
-//  "threshold"
-//  "once"
+//  "Levels"                e.g. 1H weapons have Prof, Spec, etc.
+//  "Threshold"             e.g. Life
+//  "Once"                  e.g. Ambidex
+//  "CostPlusLevel"         e.g. Talisman
+//  "CostTimesLevel"        e.g. Willpower
+//  "CostTimesLevelPlusOne" e.g. Spells
 {
     "Skill Categories": [
         {
@@ -11,7 +13,7 @@
             "Type" : [
                 {
                     "Name": "Claw",
-                    "Purchase type" : "levels",
+                    "Purchase type" : "Levels",
                     "Levels": [
                         {
                             "Level": "None",
@@ -37,7 +39,7 @@
                 },
                 {
                     "Name": "One Handed",
-                    "Purchase type" : "levels",
+                    "Purchase type" : "Levels",
                     "Levels": [
                         {
                             "Level": "None",
@@ -68,7 +70,7 @@
             "Type" : [
                 {
                     "Name": "Fur",
-                    "Purchase type" : "levels",
+                    "Purchase type" : "Levels",
                     "Levels": [
                         {
                             "Level": "None",
@@ -94,7 +96,7 @@
                 },
                 {
                     "Name": "Studded Leather",
-                    "Purchase type" : "levels",
+                    "Purchase type" : "Levels",
                     "Levels": [
                         {
                             "Level": "None",
@@ -125,18 +127,18 @@
             "Type" : [
                 {
                     "Name" : "Enhance Life",
-                    "Purchase type" : "threshold",
+                    "Purchase type" : "Threshold",
                     "Cost" : 1,
                     "Threshold" : 30
                 },
                 {
                     "Name" : "Ambidexterity",
-                    "Purchase type" : "once",
+                    "Purchase type" : "Once",
                     "Cost" : 10
                 },
                 {
                     "Name" : "Strength",
-                    "Purchase type" : "levels",
+                    "Purchase type" : "Levels",
                     "Levels": [
                         {
                             "Level": "None",
@@ -162,7 +164,7 @@
                 },
                 {
                     "Name" : "Toughness",
-                    "Purchase type" : "integer",
+                    "Purchase type" : "CostTimesLevel",
                     "Cost" : 9
                 }
             ]

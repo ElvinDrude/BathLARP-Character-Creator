@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using WeaponsSelector;
+using WeaponsSelector.src.gui;
 
 namespace WeaponsForm
 {
@@ -59,8 +60,8 @@ namespace WeaponsForm
             skillsFlowLayoutPanel.SuspendLayout();
             this.Controls.Add(skillsFlowLayoutPanel);
 
-            CreateSkillGroupBox(skillsFlowLayoutPanel, typeof(WeaponRowControls));
-            CreateSkillGroupBox(skillsFlowLayoutPanel, typeof(ArmourRowControls));
+            new WeaponGroupBoxWrapper(skillsFlowLayoutPanel);
+            new ArmourGroupBoxWrapper(skillsFlowLayoutPanel);
 
             skillsFlowLayoutPanel.ResumeLayout(false);
             skillsFlowLayoutPanel.PerformLayout();

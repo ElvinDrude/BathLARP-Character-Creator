@@ -1,0 +1,23 @@
+﻿{ "Weapons" :
+    [
+        { "Claw" : 
+            [
+                {"None" : 0},
+                {"Prof" : 2},
+                {"Spec" : 4},
+                {"Exp" : 8},
+                {"Mast" : 16}
+            ]
+        },
+
+        { "One Handed" : 
+            [
+                {"None" : 0},
+                {"Prof" : 3},
+                {"Spec" : 6},
+                {"Exp" : 12},
+                {"Mast" : 24}
+            ]
+        }
+    ]   
+}

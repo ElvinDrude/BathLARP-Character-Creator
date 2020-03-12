@@ -1,17 +1,171 @@
-﻿[
-    { "Claw" : 
-    [
-        {"Prof" : 2},
-        {"Spec" : 4},
-        {"Exp" : 8},
-        {"Mast" : 16}
-    ]},
-
-    { "1H" : 
-        [
-            {"Prof" : 3},
-            {"Spec" : 6},
-            {"Exp" : 12},
-            {"Mast" : 24}
-        ]}
-]
+﻿// Lines beginning with '//' won't be read by the application
+// "Purchase type" is one of the following possible values:
+//  "levels"
+//  "integer"
+//  "threshold"
+//  "once"
+{
+    "Skill Categories": [
+        {
+            "Category" : "Weapons",
+            "Type" : [
+                {
+                    "Name": "Claw",
+                    "Purchase type" : "levels",
+                    "Levels": [
+                        {
+                            "Level": "None",
+                            "Cost": 0
+                        },
+                        {
+                            "Level": "Prof",
+                            "Cost": 2
+                        },
+                        {
+                            "Level": "Spec",
+                            "Cost": 4
+                        },
+                        {
+                            "Level": "Exp",
+                            "Cost": 8
+                        },
+                        {
+                            "Level": "Mastery",
+                            "Cost": 16
+                        }
+                    ]
+                },
+                {
+                    "Name": "One Handed",
+                    "Purchase type" : "levels",
+                    "Levels": [
+                        {
+                            "Level": "None",
+                            "Cost": 0
+                        },
+                        {
+                            "Level": "Prof",
+                            "Cost": 3
+                        },
+                        {
+                            "Level": "Spec",
+                            "Cost": 6
+                        },
+                        {
+                            "Level": "Exp",
+                            "Cost": 12
+                        },
+                        {
+                            "Level": "Mastery",
+                            "Cost": 24
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "Category" : "Armour",
+            "Type" : [
+                {
+                    "Name": "Fur",
+                    "Purchase type" : "levels",
+                    "Levels": [
+                        {
+                            "Level": "None",
+                            "Cost": 0
+                        },
+                        {
+                            "Level": "Prof",
+                            "Cost": 2
+                        },
+                        {
+                            "Level": "Spec",
+                            "Cost": 4
+                        },
+                        {
+                            "Level": "Exp",
+                            "Cost": 8
+                        },
+                        {
+                            "Level": "Mastery",
+                            "Cost": 16
+                        }
+                    ]
+                },
+                {
+                    "Name": "Studded Leather",
+                    "Purchase type" : "levels",
+                    "Levels": [
+                        {
+                            "Level": "None",
+                            "Cost": 0
+                        },
+                        {
+                            "Level": "Prof",
+                            "Cost": 6
+                        },
+                        {
+                            "Level": "Spec",
+                            "Cost": 12
+                        },
+                        {
+                            "Level": "Exp",
+                            "Cost": 24
+                        },
+                        {
+                            "Level": "Mastery",
+                            "Cost": 48
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "Category" : "Physical/Mental", 
+            "Type" : [
+                {
+                    "Name" : "Enhance Life",
+                    "Purchase type" : "threshold",
+                    "Cost" : 1,
+                    "Threshold" : 30
+                },
+                {
+                    "Name" : "Ambidexterity",
+                    "Purchase type" : "once",
+                    "Cost" : 10
+                },
+                {
+                    "Name" : "Strength",
+                    "Purchase type" : "levels",
+                    "Levels": [
+                        {
+                            "Level": "None",
+                            "Cost": 0
+                        },
+                        {
+                            "Level": "Single",
+                            "Cost": 20
+                        },
+                        {
+                            "Level": "Double",
+                            "Cost": 30
+                        },
+                        {
+                            "Level": "Triple",
+                            "Cost": 45
+                        },
+                        {
+                            "Level": "Quad",
+                            "Cost": 90
+                        }
+                    ]
+                },
+                {
+                    "Name" : "Toughness",
+                    "Purchase type" : "integer",
+                    "Cost" : 9
+                }
+            ]
+        }
+    ]
+}

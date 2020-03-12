@@ -1,0 +1,27 @@
+{  
+    "Type" : "Claw",
+    "Costs" : 
+        [
+            { 
+                "Level" : "None",
+                "Cost" : 0
+            },
+            { 
+                "Level" : "Prof",
+                "Cost" : 2
+            },
+            { 
+                "Level" : "Spec",
+                "Cost" : 4
+            },
+            { 
+                "Level" : "Exp",
+                "Cost" : 8
+            },
+            { 
+                "Level" : "Mastery",
+                "Cost" : 16
+            }
+
+        ]
+}

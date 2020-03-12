@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PictureViewer", "PictureVie
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindowsFormsApp1", "WindowsFormsApp1\WindowsFormsApp1.csproj", "{9B6AF2EF-266F-4CCA-9E87-745944F86EBF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeaponsSelector", "WeaponsSelector\WeaponsSelector.csproj", "{E69EDC6E-B521-4C9E-AB72-8E747D6237B4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeaponsForm", "WeaponsSelector\WeaponsForm.csproj", "{E69EDC6E-B521-4C9E-AB72-8E747D6237B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

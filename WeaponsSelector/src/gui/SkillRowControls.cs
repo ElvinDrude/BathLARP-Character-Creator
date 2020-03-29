@@ -33,7 +33,6 @@ namespace WeaponsForm
             };
 
             // Gather and list all possible skills in the combobox
-            //var skillTypesList = (skillTableLayoutPanel.FindForm() as WeaponsForm).JsonSkillReader.GetWeapons();
             var skillTypesList = GetSkillTypesList(skillTableLayoutPanel);
             string[] weaponsStringList = skillTypesList.ToArray().Select(weap => weap.Name).ToArray();
             SkillTypeComboBox.Items.AddRange(weaponsStringList);
@@ -102,9 +101,6 @@ namespace WeaponsForm
                 }
                 else
                 {
-                    //WeaponsForm weaponsForm = (WeaponsForm)SkillTypeComboBox.FindForm();
-                    //var currWeapon = weaponsForm.JsonSkillReader.GetWeapon((string)SkillTypeComboBox.SelectedItem);
-
                     var currType = GetSkillType((string)SkillTypeComboBox.SelectedItem);
 
                     (SkillTypeComboBox.Tag as SkillRowControls).PopulateValidSkills(currType);

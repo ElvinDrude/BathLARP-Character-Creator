@@ -18,26 +18,39 @@ namespace WeaponsForm
                 case PurchaseType.Levels:
                     return CreateComboBox(skillType);
                 case PurchaseType.Threshold:
-                    return CreateNumericField(skillType);
-                    break;
+                    return CreateThresholdNumericField(skillType);
                 case PurchaseType.Once:
-                    break;
+                    return CreateCheckbox(skillType);
                 case PurchaseType.CostPlusLevel:
-                    break;
+                    throw new NotImplementedException("No CostPlusLevel yet");
                 case PurchaseType.CostTimesLevel:
-                    break;
+                    return CreateCostTimesLevelNumericField(skillType);
                 case PurchaseType.CostTimesLevelPlusOne:
-                    break;
+                    throw new NotImplementedException("No CostTimesLevelPlusOne yet");
                 default:
                     throw new NotImplementedException("Unimplemented PurchaseType " + purchaseType);
             }
-
-            return CreateComboBox(skillType);
-            //return new Control();
-
         }
 
-        private static Control CreateNumericField(SkillType skillType)
+        private static Control CreateCheckbox(SkillType skillType)
+        {
+            return new SkillLevelCheckbox(skillType)
+            {
+                Anchor = AnchorStyles.Top,
+            };
+        }
+
+        private static Control CreateCostTimesLevelNumericField(SkillType skillType)
+        {
+            return new SkillLevelCostTimesLevelNumericField(skillType)
+            {
+                Anchor = AnchorStyles.Top,
+                Minimum = 0,
+                Value = 0,
+            };
+        }
+
+        private static Control CreateThresholdNumericField(SkillType skillType)
         {
             return new SkillLevelThresholdNumericField(skillType)
             {

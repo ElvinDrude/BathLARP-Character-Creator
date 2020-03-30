@@ -37,6 +37,30 @@ namespace WeaponsForm
         public abstract long GetSkillLevelCost();
     }
 
+    public class SkillLevelCheckbox : CheckBox, ISkillLevelControl
+    {
+        public SkillType SkillType { get; set; }
+
+        public event EventHandler ValueChanged;
+
+        public SkillLevelCheckbox(SkillType skillType) : base()
+        {
+            SkillType = skillType;
+            this.CheckedChanged += mapCheckedChangedToValueChanged;
+        }
+
+        private void mapCheckedChangedToValueChanged(object sender, EventArgs e)
+        {
+            ValueChanged?.Invoke(sender, e);
+        }
+
+        public long GetSkillLevelCost()
+        {
+            // Checkboxes indicate a one-time only skill purchase
+            return this.Checked ? SkillType.Cost.GetValueOrDefault() : 0;
+        }
+    }
+
     public class SkillLevelComboBox : ComboBox, ISkillLevelControl
     {
         public SkillType SkillType { get; set; }
@@ -99,6 +123,8 @@ namespace WeaponsForm
             long runningLifeBought = 0;
             long runningCost = 0;
 
+            // Count up from 0 to the maximum number of thresholds they've bought through (including any partial ones, so 
+            // maxThreshold is always greater than 0 if life greater than 0)
             for (int i = 0; i < maxThreshold; i++)
             {
                 while (runningLifeBought < thresholdIncrement * (currThreshold + 1) && runningLifeBought < Decimal.ToInt64(this.Value))
@@ -107,10 +133,26 @@ namespace WeaponsForm
                     runningLifeBought += 1;
                 }
                 currThreshold += 1;
-                currCostOfEachPoint++;
+                currCostOfEachPoint++; // Each time we reach a threshold, increase future cost by one.
             }
 
             return runningCost;
+
+        }
+    }
+
+    public class SkillLevelCostTimesLevelNumericField : SkillLevelNumericField
+    {
+        public SkillLevelCostTimesLevelNumericField(SkillType skill) : base(skill)
+        {
+
+        }
+
+        public override long GetSkillLevelCost()
+        {
+            // Triangular numbers formula: cost * .5 * N * (N+1), where N is number of levels to purchase
+            double cost = SkillType.Cost.GetValueOrDefault() * 0.5 * Decimal.ToDouble(this.Value) * Decimal.ToDouble(this.Value + 1);
+            return (long)cost;
 
         }
     }

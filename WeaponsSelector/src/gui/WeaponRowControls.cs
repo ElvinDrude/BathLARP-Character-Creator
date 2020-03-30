@@ -16,7 +16,7 @@ namespace WeaponsForm
 
         internal override SkillType GetSkillType(string weaponType)
         {
-            return (SkillLevelComboBox.FindForm() as WeaponsForm).JsonSkillReader.GetWeaponType(weaponType);
+            return (SkillLevelControl.FindForm() as WeaponsForm).JsonSkillReader.GetWeaponType(weaponType);
         }
 
         internal override List<SkillType> GetSkillTypesList(TableLayoutPanel skillTableLayoutPanel)

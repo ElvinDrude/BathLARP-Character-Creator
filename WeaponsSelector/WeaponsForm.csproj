@@ -118,6 +118,10 @@
     <Compile Include="src\gui\PhysicalMentalGroupBox.cs" />
     <Compile Include="src\gui\PhysicalMentalRowControls.cs" />
     <Compile Include="src\gui\SkillGroupBoxWrapper.cs" />
+    <Compile Include="src\gui\SkillLevelControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="src\gui\SkillLevelControlFactory.cs" />
     <Compile Include="src\gui\SkillRowControls.cs" />
     <Compile Include="src\gui\WeaponGroupBoxWrapper.cs" />
     <Compile Include="src\json\JsonSkillReader.cs" />

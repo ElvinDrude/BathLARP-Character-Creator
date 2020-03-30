@@ -38,7 +38,7 @@ namespace WeaponsForm
 
         private static Control CreateComboBox(SkillType skillType)
         {
-            SkillLevelComboBox skillLevelComboBox = new SkillLevelComboBox
+            SkillLevelComboBox skillLevelComboBox = new SkillLevelComboBox(skillType)
             {
                 Anchor = AnchorStyles.Top,
                 //Name = "SkillLevelComboBox#" + skillTableLayoutPanel.RowCount.ToString(),

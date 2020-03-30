@@ -43,10 +43,10 @@ namespace WeaponsForm
 
             skillTableLayoutPanel.Controls.Add(SkillTypeComboBox, 0, skillTableLayoutPanel.RowCount);
 
-            //This is baiscally a placeholder, to be replaced later with the right kind of control for the selected skill.
+            //This is basically a placeholder, to be replaced later with the right kind of control for the selected skill.
             //All this really serves as is a spacer. 
             //TODO: See if there's a proper spacer control!
-            SkillLevelControl = new SkillLevelComboBox
+            SkillLevelControl = new SkillLevelComboBox(null)
             {
                 Anchor = AnchorStyles.Top,
                 Name = "SkillLevelComboBox#" + skillTableLayoutPanel.RowCount.ToString(),
@@ -136,24 +136,29 @@ namespace WeaponsForm
 
         private void SkillSkillLevel_SelectedValueChanged(object sender, EventArgs e)
         {
+            long skillCost = (SkillLevelControl as ISkillLevelControl).GetSkillLevelCost();
+            SkillCostTextBox.Text = skillCost.ToString();
+
+
+
             //TODO: Extra check for whether the name matches the pattern we expect?
-            if (sender is ComboBox)
-            {
-                ComboBox skillComboBox = sender as ComboBox;
+            //if (sender is ComboBox)
+            //{
+            //    ComboBox skillComboBox = sender as ComboBox;
 
-                SkillRowControls skillRowControl = skillComboBox.Tag as SkillRowControls;
-                var SkillTypeComboBox = skillRowControl.SkillTypeComboBox;
+            //    SkillRowControls skillRowControl = skillComboBox.Tag as SkillRowControls;
+            //    var SkillTypeComboBox = skillRowControl.SkillTypeComboBox;
 
-                var currType = GetSkillType((string)SkillTypeComboBox.SelectedItem);
+            //    var currType = GetSkillType((string)SkillTypeComboBox.SelectedItem);
 
-                TextBox weaponCostTextBox = skillRowControl.SkillCostTextBox;
+            //    TextBox weaponCostTextBox = skillRowControl.SkillCostTextBox;
 
-                long totalCost = currType.GetSkillLevelCost((string)skillComboBox.SelectedItem);
+            //    long totalCost = currType.GetSkillLevelCost((string)skillComboBox.SelectedItem);
 
-                weaponCostTextBox.Text = totalCost.ToString();
+            //    weaponCostTextBox.Text = totalCost.ToString();
 
 
-            }
+            //}
         }
 
     }

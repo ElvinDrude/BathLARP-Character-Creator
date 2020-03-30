@@ -18,6 +18,7 @@ namespace WeaponsForm
                 case PurchaseType.Levels:
                     return CreateComboBox(skillType);
                 case PurchaseType.Threshold:
+                    return CreateNumericField(skillType);
                     break;
                 case PurchaseType.Once:
                     break;
@@ -34,6 +35,16 @@ namespace WeaponsForm
             return CreateComboBox(skillType);
             //return new Control();
 
+        }
+
+        private static Control CreateNumericField(SkillType skillType)
+        {
+            return new SkillLevelThresholdNumericField(skillType)
+            {
+                Anchor = AnchorStyles.Top,
+                Minimum = 0,
+                Value = 0,
+            };
         }
 
         private static Control CreateComboBox(SkillType skillType)

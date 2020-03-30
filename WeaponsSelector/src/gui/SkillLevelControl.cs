@@ -37,11 +37,6 @@ namespace WeaponsForm
         public abstract long GetSkillLevelCost();
     }
 
-    //public class MyEventArgs : EventArgs
-    //{
-    //    // class members  
-    //}
-
     public class SkillLevelComboBox : ComboBox, ISkillLevelControl
     {
         public SkillType SkillType { get; set; }
@@ -65,6 +60,59 @@ namespace WeaponsForm
         }
     }
 
+    public abstract class SkillLevelNumericField : NumericUpDown, ISkillLevelControl
+    {
+        public SkillType SkillType { get; set; }
 
+        //The base event type for NumericUpDown is called ValueChanged, the same as in the ISkillLevelControl interface
+        //public event EventHandler ValueChanged;
+
+        public SkillLevelNumericField(SkillType skillType) : base()
+        {
+            SkillType = skillType;
+        }
+
+        public abstract long GetSkillLevelCost();
+    }
+
+    public class SkillLevelThresholdNumericField : SkillLevelNumericField
+    {
+        public SkillLevelThresholdNumericField(SkillType skill) : base(skill)
+        {
+
+        }
+
+        public override long GetSkillLevelCost()
+        {
+            //TODO: Work out how to properly deal with the ?. operators   
+            var thresholdIncrement = SkillType.Threshold.GetValueOrDefault();
+            var startCost = SkillType.Cost;
+
+            int currThreshold = 0;
+
+            var currCostOfEachPoint = startCost + currThreshold;
+
+            //Check these casts
+            var tmp = (double)Decimal.ToInt64(this.Value) / thresholdIncrement;
+            int maxThreshold = (int)Math.Ceiling(tmp);
+
+            long runningLifeBought = 0;
+            long runningCost = 0;
+
+            for (int i = 0; i < maxThreshold; i++)
+            {
+                while (runningLifeBought < thresholdIncrement * (currThreshold + 1) && runningLifeBought < Decimal.ToInt64(this.Value))
+                {
+                    runningCost += currCostOfEachPoint.GetValueOrDefault();
+                    runningLifeBought += 1;
+                }
+                currThreshold += 1;
+                currCostOfEachPoint++;
+            }
+
+            return runningCost;
+
+        }
+    }
 
 }

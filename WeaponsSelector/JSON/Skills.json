@@ -168,6 +168,56 @@
                     "Cost" : 9
                 }
             ]
+        },
+        {
+            "Category" : "Medical", 
+            "Type" : [                
+                {
+                    "Name" : "Bind Wounds",
+                    "Purchase type" : "Once",
+                    "Cost" : 10
+                },
+                {
+                    "Name" : "Set Broken Bone",
+                    "Purchase type" : "Once",
+                    "Cost" : 10
+                },
+                {
+                    "Name" : "Discern Wounds",
+                    "Purchase type" : "Once",
+                    "Cost" : 10
+                },
+                {
+                    "Name" : "Discern Disease",
+                    "Purchase type" : "Once",
+                    "Cost" : 10
+                },
+                {
+                    "Name" : "Discern Spiritual Influence",
+                    "Purchase type" : "Once",
+                    "Cost" : 10
+                },
+                {
+                    "Name" : "Discern Poisoning",
+                    "Purchase type" : "Once",
+                    "Cost" : 10
+                },
+                {
+                    "Name" : "Discern Paralysis",
+                    "Purchase type" : "Once",
+                    "Cost" : 10
+                }
+            ]
+        },
+        {
+            "Category" : "Magic", 
+            "Type" : [
+                {
+                    "Name" : "Learn Spell",
+                    "Purchase type" : "CostTimesLevelPlusOne",
+                    "Cost" : 6
+                }
+            ]
         }
     ]
 }

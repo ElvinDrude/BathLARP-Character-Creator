@@ -25,8 +25,8 @@ namespace WeaponsForm
         //TODO: Re-work this to remove the need for set - currently used in CreateHeaderFlowLayoutPanel
         public RankTextBox RankTextBox { get; private set; }
 
-        private IList<WeaponRowControls> weaponRowControls;
-        private IList<ArmourRowControls> armourRowControls;
+        //private IList<WeaponRowControls> weaponRowControls;
+        //private IList<ArmourRowControls> armourRowControls;
 
         /// <summary>
         /// The current version of the JSON skill costs that all parts of the application should read from
@@ -70,7 +70,9 @@ namespace WeaponsForm
             //CreatePhysicalMentalGroupBox(skillsFlowLayoutPanel);
             new PhysicalMentalGroupBox(skillsFlowLayoutPanel);
 
-            
+            new MedicalGroupBox(skillsFlowLayoutPanel);
+
+
 
             this.ResumeLayout();
         }

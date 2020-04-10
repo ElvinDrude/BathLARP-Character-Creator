@@ -110,11 +110,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\gui\MedicalGroupBox.cs" />
     <Compile Include="src\character\record\Record.cs" />
     <Compile Include="src\character\record\SkillRecordFactory.cs" />
     <Compile Include="src\Constants.cs" />
     <Compile Include="src\gui\ArmourGroupBoxWrapper.cs" />
     <Compile Include="src\gui\ArmourRowControls.cs" />
+    <Compile Include="src\gui\MedicalRowControls.cs" />
     <Compile Include="src\gui\PhysicalMentalGroupBox.cs" />
     <Compile Include="src\gui\PhysicalMentalRowControls.cs" />
     <Compile Include="src\gui\SkillGroupBoxWrapper.cs" />
@@ -142,6 +144,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="JSON\Spells.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -157,7 +160,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="JSON\WeaponSkills.json" />
+    <None Include="JSON\Skills.json" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.2.9.6\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />

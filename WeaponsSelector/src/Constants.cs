@@ -11,5 +11,6 @@ namespace WeaponsForm
         public const string Weapons = "Weapons"; //Note: Used as both a name in the JSON file and as a display string to the user
         public const string Armour = "Armour"; //Note: Used as both a name in the JSON file and as a display string to the user
         public const string PhysicalMental = "Physical/Mental"; //Note: Used as both a name in the JSON file and as a display string to the user
+        public const string Medical = "Medical"; //Note: Used as both a name in the JSON file and as a display string to the user
     }
 }

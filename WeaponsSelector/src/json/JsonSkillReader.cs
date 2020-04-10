@@ -8,7 +8,7 @@ using Newtonsoft.Json.Converters;
 using System;
 using System.Linq;
 
-namespace WeaponsForm
+namespace WeaponsForm.Skills
 {
     public class JsonSkillReader
     {
@@ -17,7 +17,7 @@ namespace WeaponsForm
 
         public JsonSkillReader()
         {
-            string fileLoc = "C:\\Users\\Elvin\\source\\repos\\PictureViewer\\WeaponsSelector\\JSON\\WeaponSkills.json";
+            string fileLoc = "C:\\Users\\Elvin\\source\\repos\\PictureViewer\\WeaponsSelector\\JSON\\Skills.json";
             var fileContentsList = File.ReadAllLines(fileLoc).ToList();
             fileContentsList.RemoveAll(x => x.Trim().StartsWith("//"));
             string fileContentsString = String.Join("", fileContentsList);

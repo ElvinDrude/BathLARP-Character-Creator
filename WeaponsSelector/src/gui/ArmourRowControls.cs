@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WeaponsForm;
 using WeaponsSelector;
+using WeaponsForm.Skills;
 
 namespace WeaponsForm
 {

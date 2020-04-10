@@ -5,8 +5,6 @@ namespace WeaponsSelector.src.gui
 {
     internal class MedicalGroupBox : SkillGroupBoxWrapper
     {
-        private FlowLayoutPanel skillsFlowLayoutPanel;
-
         public MedicalGroupBox(FlowLayoutPanel skillsFlowLayoutPanel) : base(skillsFlowLayoutPanel)
         {
         }

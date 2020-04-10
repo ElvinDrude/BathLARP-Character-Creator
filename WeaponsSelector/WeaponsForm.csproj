@@ -131,6 +131,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="src\gui\WeaponRowControls.cs" />
+    <Compile Include="src\json\JsonSpellReader.cs" />
     <Compile Include="WeaponsForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -9,12 +9,13 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using WeaponsSelector;
 using WeaponsSelector.src.gui;
+using WeaponsForm.Skills;
 
 namespace WeaponsForm
 {
     public class WeaponsForm : Form
     {
-        private TableLayoutPanel tableLayoutPanel;
+        //private TableLayoutPanel tableLayoutPanel;
         //private TableLayoutPanel armourTableLayoutPanel;
 
         private FlowLayoutPanel headerFlowLayoutPanel;

@@ -1,0 +1,69 @@
+{
+    "Spell Schools": [
+        {
+            "School" : "Water",
+            "Spell Chain" : [
+                {
+                    "Name": "Trip",
+                    "Levels": [
+                        {
+                            "Description": 1,
+                            "Level" : 0
+                        }
+                    ]
+                },
+                {
+                    "Name": "Ice Dart",
+                    "Levels": [
+                        {
+                            "Description": "2",
+                            "Level": 0
+                        },
+                        {
+                            "Description": "4",
+                            "Level": 3
+                        },
+                        {
+                            "Description": "6",
+                            "Level": 6
+                        },
+                        {
+                            "Description": "8",
+                            "Level": 12
+                        },
+                        {
+                            "Description": "10",
+                            "Level": 24
+                        }
+                    ]
+                },
+                 {
+                    "Name": "Strength",
+                    "Levels": [
+                        {
+                            "Description": "Single",
+                            "Level": 0
+                        },
+                        {
+                            "Description": "Double",
+                            "Level": 3
+                        },
+                        {
+                            "Description": "Triple",
+                            "Level": 6
+                        },
+                        {
+                            "Description": "Quad",
+                            "Level": 12
+                        },
+                        {
+                            "Description": "Quint",
+                            "Level": 24
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+    
+}

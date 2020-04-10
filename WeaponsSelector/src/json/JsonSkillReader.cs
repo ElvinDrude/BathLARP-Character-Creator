@@ -13,7 +13,7 @@ namespace WeaponsForm
     public class JsonSkillReader
     {
         //private readonly List<Weapon> weapons;
-        private AllSkills allSkills;
+        private readonly AllSkills allSkills;
 
         public JsonSkillReader()
         {
@@ -21,7 +21,12 @@ namespace WeaponsForm
             var fileContentsList = File.ReadAllLines(fileLoc).ToList();
             fileContentsList.RemoveAll(x => x.Trim().StartsWith("//"));
             string fileContentsString = String.Join("", fileContentsList);
-            allSkills = AllSkills.FromJson(fileContentsString);            
+            allSkills = AllSkills.FromJson(fileContentsString);
+        }
+
+        internal SkillType GetMedicalType(string medicalType)
+        {
+            return allSkills.SkillCategories.Find(x => x.Category == Constants.Medical).Skills.Find(x => x.Name == medicalType);
         }
 
         internal SkillType GetPhysicalMentalType(string physicalMentalType)
@@ -61,6 +66,11 @@ namespace WeaponsForm
         internal List<SkillType> GetPhysicalMentalSkills()
         {
             return allSkills.SkillCategories.Find(x => x.Category == Constants.PhysicalMental).Skills;
+        }
+
+        internal List<SkillType> GetMedicalSkills()
+        {
+            return allSkills.SkillCategories.Find(x => x.Category == Constants.Medical).Skills;
         }
     }
 

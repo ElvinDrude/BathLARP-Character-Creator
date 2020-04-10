@@ -10,7 +10,8 @@ namespace WeaponsForm
     public abstract class SkillRowControls
     {
         public ComboBox SkillTypeComboBox { get; }
-        public ComboBox SkillLevelComboBox { get; }
+        //public SkillLevelComboBox SkillLevelComboBox { get; }
+        public Control SkillLevelControl { get; set; }
         public TextBox SkillCostTextBox { get; }
 
         /// <summary>
@@ -33,7 +34,6 @@ namespace WeaponsForm
             };
 
             // Gather and list all possible skills in the combobox
-            //var skillTypesList = (skillTableLayoutPanel.FindForm() as WeaponsForm).JsonSkillReader.GetWeapons();
             var skillTypesList = GetSkillTypesList(skillTableLayoutPanel);
             string[] weaponsStringList = skillTypesList.ToArray().Select(weap => weap.Name).ToArray();
             SkillTypeComboBox.Items.AddRange(weaponsStringList);
@@ -43,7 +43,10 @@ namespace WeaponsForm
 
             skillTableLayoutPanel.Controls.Add(SkillTypeComboBox, 0, skillTableLayoutPanel.RowCount);
 
-            SkillLevelComboBox = new ComboBox
+            //This is basically a placeholder, to be replaced later with the right kind of control for the selected skill.
+            //All this really serves as is a spacer. 
+            //TODO: See if there's a proper spacer control!
+            SkillLevelControl = new SkillLevelComboBox(null)
             {
                 Anchor = AnchorStyles.Top,
                 Name = "SkillLevelComboBox#" + skillTableLayoutPanel.RowCount.ToString(),
@@ -52,7 +55,7 @@ namespace WeaponsForm
                 Tag = this,
             };
 
-            skillTableLayoutPanel.Controls.Add(SkillLevelComboBox, 1, skillTableLayoutPanel.RowCount);
+            skillTableLayoutPanel.Controls.Add(SkillLevelControl, 1, skillTableLayoutPanel.RowCount);
 
             SkillCostTextBox = new TextBox
             {
@@ -67,7 +70,8 @@ namespace WeaponsForm
 
             (SkillCostTextBox.FindForm() as WeaponsForm).RankTextBox.RegisterRankCostTextBox(SkillCostTextBox);
 
-            SkillLevelComboBox.SelectedValueChanged += SkillSkillLevel_SelectedValueChanged;
+            //TODO; Remove this, as skill level combo box is now a placeholder
+            //SkillLevelControl.SelectedValueChanged += SkillSkillLevel_SelectedValueChanged;
 
         }
 
@@ -80,12 +84,12 @@ namespace WeaponsForm
 
         internal abstract SkillType GetSkillType(string weaponType);
 
-        internal void PopulateValidSkills(SkillType type)
-        {
-            SkillLevelComboBox.Items.Clear();
-            SkillLevelComboBox.Items.AddRange(type.GetValidSkillLevels());
-            SkillLevelComboBox.SelectedIndex = 0;
-        }
+        //internal void PopulateValidSkills(SkillType type)
+        //{
+        //    SkillLevelControl.Items.Clear();
+        //    SkillLevelControl.Items.AddRange(type.GetValidSkillLevels());
+        //    SkillLevelControl.SelectedIndex = 0;
+        //}
 
 
         private void SkillType_SelectedValueChanged(object sender, EventArgs e)
@@ -94,48 +98,67 @@ namespace WeaponsForm
             if (sender is ComboBox)
             {
                 ComboBox SkillTypeComboBox = sender as ComboBox;
-                var weaponRowControls = SkillTypeComboBox.Tag as SkillRowControls;
+                //var weaponRowControls = SkillTypeComboBox.Tag as SkillRowControls;
 
                 if (String.IsNullOrEmpty(SkillTypeComboBox.SelectedItem as string))
                 {
-                    weaponRowControls.SkillLevelComboBox.Enabled = false;
+                    SkillLevelControl.Enabled = false;
                 }
                 else
                 {
-                    //WeaponsForm weaponsForm = (WeaponsForm)SkillTypeComboBox.FindForm();
-                    //var currWeapon = weaponsForm.JsonSkillReader.GetWeapon((string)SkillTypeComboBox.SelectedItem);
-
                     var currType = GetSkillType((string)SkillTypeComboBox.SelectedItem);
 
-                    (SkillTypeComboBox.Tag as SkillRowControls).PopulateValidSkills(currType);
+                    // Remove the placeholder SkillLevelComboBox
+                    TableLayoutPanel parent = SkillLevelControl.Parent as TableLayoutPanel;
+                    parent.SuspendLayout();
+                    parent.Controls.Remove(SkillLevelControl);
 
-                    weaponRowControls.SkillLevelComboBox.Enabled = true;
+                    SkillLevelControl = SkillLevelControlFactory.CreateNewSkillLevelControl(currType);
+                    //(newSkillLevelComboBox as ComboBox).SelectedValueChanged += SkillSkillLevel_SelectedValueChanged;
+                    (SkillLevelControl as ISkillLevelControl).ValueChanged += SkillSkillLevel_SelectedValueChanged;
+
+                    parent.Controls.Add(SkillLevelControl, 1, parent.RowCount);
+                    parent.ResumeLayout(true);
+
+
+                    //if (currType.PurchaseType == PurchaseType.Levels)
+                    //{
+                    //    (SkillTypeComboBox.Tag as SkillRowControls).PopulateValidSkills(currType);
+                    //}
+                    //else
+                    //{
+                    //    weaponRowControls.SkillLevelComboBox.Parent.Controls.Remove(weaponRowControls.SkillLevelComboBox);
+                    //}
+                    //weaponRowControls.SkillLevelComboBox.Enabled = true;
                 }
             }
         }
 
         private void SkillSkillLevel_SelectedValueChanged(object sender, EventArgs e)
         {
+            long skillCost = (SkillLevelControl as ISkillLevelControl).GetSkillLevelCost();
+            SkillCostTextBox.Text = skillCost.ToString();
+
+
+
             //TODO: Extra check for whether the name matches the pattern we expect?
-            if (sender is ComboBox)
-            {
-                ComboBox skillComboBox = sender as ComboBox;
+            //if (sender is ComboBox)
+            //{
+            //    ComboBox skillComboBox = sender as ComboBox;
 
-                SkillRowControls skillRowControl = skillComboBox.Tag as SkillRowControls;
-                var SkillTypeComboBox = skillRowControl.SkillTypeComboBox;
+            //    SkillRowControls skillRowControl = skillComboBox.Tag as SkillRowControls;
+            //    var SkillTypeComboBox = skillRowControl.SkillTypeComboBox;
 
-                var currType = GetSkillType((string)SkillTypeComboBox.SelectedItem);
+            //    var currType = GetSkillType((string)SkillTypeComboBox.SelectedItem);
 
-                //WOrking on: Creating a skill record at this point
+            //    TextBox weaponCostTextBox = skillRowControl.SkillCostTextBox;
 
-                TextBox weaponCostTextBox = skillRowControl.SkillCostTextBox;
+            //    long totalCost = currType.GetSkillLevelCost((string)skillComboBox.SelectedItem);
 
-                long totalCost = currType.GetSkillLevelCost((string)skillComboBox.SelectedItem);
-
-                weaponCostTextBox.Text = totalCost.ToString();
+            //    weaponCostTextBox.Text = totalCost.ToString();
 
 
-            }
+            //}
         }
 
     }

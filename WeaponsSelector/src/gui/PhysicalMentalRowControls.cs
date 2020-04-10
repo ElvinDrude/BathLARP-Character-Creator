@@ -15,7 +15,7 @@ namespace WeaponsForm
 
         internal override SkillType GetSkillType(string physicalMentalType)
         {
-            return (SkillLevelComboBox.FindForm() as WeaponsForm).JsonSkillReader.GetPhysicalMentalType(physicalMentalType);
+            return (SkillLevelControl.FindForm() as WeaponsForm).JsonSkillReader.GetPhysicalMentalType(physicalMentalType);
         }
 
         internal override List<SkillType> GetSkillTypesList(TableLayoutPanel skillTableLayoutPanel)

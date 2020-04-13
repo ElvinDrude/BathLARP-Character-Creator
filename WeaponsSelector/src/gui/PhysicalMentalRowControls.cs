@@ -10,18 +10,8 @@ namespace WeaponsForm
 {
     internal class PhysicalMentalRowControls : SkillRowControls
     {
-        public PhysicalMentalRowControls(TableLayoutPanel skillTableLayoutPanel) : base(skillTableLayoutPanel)
+        public PhysicalMentalRowControls(TableLayoutPanel skillTableLayoutPanel) : base(skillTableLayoutPanel, Constants.PhysicalMental)
         {
-        }
-
-        internal override SkillType GetSkillType(string physicalMentalType)
-        {
-            return (SkillLevelControl.FindForm() as WeaponsForm).JsonSkillReader.GetPhysicalMentalType(physicalMentalType);
-        }
-
-        internal override List<SkillType> GetSkillTypesList(TableLayoutPanel skillTableLayoutPanel)
-        {
-            return (skillTableLayoutPanel.FindForm() as WeaponsForm).JsonSkillReader.GetPhysicalMentalSkills();
         }
     }
 }

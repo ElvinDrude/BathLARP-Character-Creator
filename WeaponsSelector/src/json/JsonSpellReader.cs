@@ -23,6 +23,11 @@ namespace WeaponsForm.Spells
             allSpells = AllSpells.FromJson(fileContentsString);
         }
 
+        internal List<SpellSchool> GetSpellSchools()
+        {
+            return allSpells.SpellSchools;
+        }
+
         //internal SpellSchool GetSpellSchool(string spellSchool)
         //{
         //    return allSpells.SpellSchools.Find( x => x.School == Constants.)

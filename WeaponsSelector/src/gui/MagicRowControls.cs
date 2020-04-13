@@ -7,18 +7,9 @@ namespace WeaponsForm
 {
     internal class MagicRowControls : SkillRowControls
     {
-        public MagicRowControls(TableLayoutPanel skillTableLayoutPanel) : base(skillTableLayoutPanel)
+        public MagicRowControls(TableLayoutPanel skillTableLayoutPanel) : base(skillTableLayoutPanel, Constants.Magic)
         {
         }
 
-        internal override SkillType GetSkillType(string weaponType)
-        {
-            return (SkillLevelControl.FindForm() as WeaponsForm).JsonSkillReader.GetMagicType(weaponType);
-        }
-
-        internal override List<SkillType> GetSkillTypesList(TableLayoutPanel skillTableLayoutPanel)
-        {
-            return (skillTableLayoutPanel.FindForm() as WeaponsForm).JsonSkillReader.GetMagicSkills();
-        }
     }
 }

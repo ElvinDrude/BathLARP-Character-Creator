@@ -24,65 +24,26 @@ namespace WeaponsForm.Skills
             allSkills = AllSkills.FromJson(fileContentsString);
         }
 
-
-
-        internal SkillType GetMagicType(string magicType)
+        /// <summary>
+        /// Return all of the SkillTypes available in a given category a.k.a. the list of skills in that category.
+        /// </summary>
+        /// <param name="category">The category. Should be one of the strings defined in Constants.</param>
+        /// <returns>The list of skill types</returns>
+        /// TODO: Throws? On error?
+        internal List<SkillType> GetSkillTypeList(string category)
         {
-            return allSkills.SkillCategories.Find(x => x.Category == Constants.Magic).Skills.Find(x => x.Name == magicType);
-        }
-
-        internal SkillType GetMedicalType(string medicalType)
-        {
-            return allSkills.SkillCategories.Find(x => x.Category == Constants.Medical).Skills.Find(x => x.Name == medicalType);
-        }
-
-        internal SkillType GetPhysicalMentalType(string physicalMentalType)
-        {
-            return allSkills.SkillCategories.Find(x => x.Category == Constants.PhysicalMental).Skills.Find(x => x.Name == physicalMentalType);
-        }
-
-        internal SkillType GetArmourType(string armourName)
-        {
-            return allSkills.SkillCategories.Find(x => x.Category == Constants.Armour).Skills.Find(x => x.Name == armourName);
+            return allSkills.SkillCategories.Find(x => x.Category == category).Skills;
         }
 
         /// <summary>
-        /// Return the Type object with the given weaponType in the Weapons category
+        /// Return the SkillType object that matches the given name
         /// </summary>
-        /// <param name="weaponType">the name of the type to search for</param>
+        /// <param name="category">The category. Should be one of the strings defined in Constants.</param>
+        /// <param name="skillTypeName">The name of the skill type to find inside the category</param>
         /// <returns></returns>
-        internal SkillType GetWeaponType(string weaponName)
+        internal SkillType GetSkillType(string category, string skillTypeName)
         {
-            return allSkills.SkillCategories.Find(x => x.Category == Constants.Weapons).Skills.Find(x => x.Name == weaponName);
-        }
-
-        internal List<SkillType> GetArmourSkills()
-        {
-            return allSkills.SkillCategories.Find(x => x.Category == Constants.Armour).Skills;
-        }        
-
-        /// <summary>
-        /// Return the list of skills (claw, 1H, etc.) in the Weapons category
-        /// </summary>
-        /// <returns></returns>
-        public List<SkillType> GetWeaponsSkills()
-        {            
-            return allSkills.SkillCategories.Find(x => x.Category == Constants.Weapons).Skills;
-        }
-
-        internal List<SkillType> GetPhysicalMentalSkills()
-        {
-            return allSkills.SkillCategories.Find(x => x.Category == Constants.PhysicalMental).Skills;
-        }
-
-        internal List<SkillType> GetMedicalSkills()
-        {
-            return allSkills.SkillCategories.Find(x => x.Category == Constants.Medical).Skills;
-        }
-
-        internal List<SkillType> GetMagicSkills()
-        {
-            return allSkills.SkillCategories.Find(x => x.Category == Constants.Magic).Skills;
+            return allSkills.SkillCategories.Find(x => x.Category == category).Skills.Find(x => x.Name == skillTypeName);
         }
     }
 

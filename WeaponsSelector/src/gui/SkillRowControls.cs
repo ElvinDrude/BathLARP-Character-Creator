@@ -15,14 +15,19 @@ namespace WeaponsForm
         public Control SkillLevelControl { get; set; }
         public TextBox SkillCostTextBox { get; }
 
+        // A string that identifies the subclass's actual type (weapons, armour, etc.).
+        protected string SkillCategoryIdentifier;
+
         /// <summary>
         /// Create a new set of components defining a skill, and make them a new row at the bottom of
         /// the given TableLayoutPanel
         /// </summary>
         /// <param name="rankTextBox">The global rank text box that updates with all rank information</param>
         /// <param name="skillTableLayoutPanel">The table to which the new weapons controls will be added. Must already be added to the parent form.</param>
-        public SkillRowControls(TableLayoutPanel skillTableLayoutPanel)
+        public SkillRowControls(TableLayoutPanel skillTableLayoutPanel, string skillCategoryIdentifier)
         {
+            SkillCategoryIdentifier = skillCategoryIdentifier;
+
             skillTableLayoutPanel.RowCount += 1;
 
             SkillTypeComboBox = new ComboBox
@@ -81,9 +86,25 @@ namespace WeaponsForm
         /// </summary>
         /// <param name="skillTableLayoutPanel">The table that will be used to find the parent WeaponsForm.</param>
         /// <returns></returns>
-        internal abstract List<SkillType> GetSkillTypesList(TableLayoutPanel skillTableLayoutPanel);
+        //internal abstract List<SkillType> GetSkillTypesList(TableLayoutPanel skillTableLayoutPanel);
+        //TODO: SpellRowControls need this to be virtual. Might hae to split those out more sensibly?
+        internal virtual List<SkillType> GetSkillTypesList(TableLayoutPanel skillTableLayoutPanel)
+        {
+            if (SkillCategoryIdentifier == null)
+            {
+                throw new ArgumentNullException("Skill category identifier not set!");
+            }
+            return (skillTableLayoutPanel.FindForm() as WeaponsForm).JsonSkillReader.GetSkillTypeList(SkillCategoryIdentifier);
+        }
 
-        internal abstract SkillType GetSkillType(string weaponType);
+        internal virtual SkillType GetSkillType(string skillType)
+        {
+            if (SkillCategoryIdentifier == null)
+            {
+                throw new ArgumentNullException("Skill category identifier not set!");
+            }
+            return (SkillLevelControl.FindForm() as WeaponsForm).JsonSkillReader.GetSkillType(SkillCategoryIdentifier, skillType);
+        }
 
         //internal void PopulateValidSkills(SkillType type)
         //{
@@ -101,6 +122,7 @@ namespace WeaponsForm
                 ComboBox SkillTypeComboBox = sender as ComboBox;
                 //var weaponRowControls = SkillTypeComboBox.Tag as SkillRowControls;
 
+                //TODO: What's this doing? Why do I disable the box?
                 if (String.IsNullOrEmpty(SkillTypeComboBox.SelectedItem as string))
                 {
                     SkillLevelControl.Enabled = false;

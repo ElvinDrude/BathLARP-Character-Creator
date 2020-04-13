@@ -234,6 +234,18 @@
                     "Cost" : 6
                 }
             ]
+        },
+        {
+            // These are for skills that aren't directly purchaseable as such, they're used in conjunction
+            // with other information in order to actually be useful.
+            "Category" : "Special",
+            "Type" : [
+                {
+                    "Name" : "Learn Spell",
+                    "Purchase type" : "CostTimesLevelPlusOne",
+                    "Cost" : 6
+                }
+            ]
         }
     ]
 }

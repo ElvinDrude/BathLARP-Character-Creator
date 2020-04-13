@@ -15,6 +15,10 @@ namespace WeaponsForm
         public const string Medical = "Medical"; 
         public const string Magic = "Magic";
 
+        //This one isn't displayed to the user but is in the JSON file
+        public const string Special = "Special";
+
+        //Constants below here are not used in JSON, only as user display strings.
         public const string Spells = "Spells";
     }
 }

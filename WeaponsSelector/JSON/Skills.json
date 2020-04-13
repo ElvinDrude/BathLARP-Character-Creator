@@ -213,8 +213,24 @@
             "Category" : "Magic", 
             "Type" : [
                 {
-                    "Name" : "Learn Spell",
-                    "Purchase type" : "CostTimesLevelPlusOne",
+                    "Name" : "Recognise Magic",
+                    "Purchase type" : "Once",
+                    "Cost" : 4
+                },
+                {
+                    "Name" : "Read/Write School Runes",
+                    "Purchase type" : "Once",
+                    "Cost" : 4
+                },
+                {
+                    "Name" : "Enhance Mana",
+                    "Purchase type" : "Threshold",
+                    "Cost" : 1,
+                    "Threshold" : 100
+                },
+                {
+                    "Name" : "Create Talisman",
+                    "Purchase type" : "CostPlusLevel",
                     "Cost" : 6
                 }
             ]

@@ -7,7 +7,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace WeaponsForm.spells
+namespace WeaponsForm.Spells
 {
     public class JsonSpellReader
     {
@@ -22,6 +22,11 @@ namespace WeaponsForm.spells
             string fileContentsString = String.Join("", fileContentsList);
             allSpells = AllSpells.FromJson(fileContentsString);
         }
+
+        //internal SpellSchool GetSpellSchool(string spellSchool)
+        //{
+        //    return allSpells.SpellSchools.Find( x => x.School == Constants.)
+        //}
 
     }
     public partial class AllSpells

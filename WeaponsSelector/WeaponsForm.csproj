@@ -110,6 +110,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\gui\SpellsGroupBox.cs" />
+    <Compile Include="src\gui\MagicGroupBox.cs" />
+    <Compile Include="src\gui\MagicRowControls.cs" />
     <Compile Include="src\gui\MedicalGroupBox.cs" />
     <Compile Include="src\character\record\Record.cs" />
     <Compile Include="src\character\record\SkillRecordFactory.cs" />
@@ -125,6 +128,7 @@
     </Compile>
     <Compile Include="src\gui\SkillLevelControlFactory.cs" />
     <Compile Include="src\gui\SkillRowControls.cs" />
+    <Compile Include="src\gui\SpellsRowControls.cs" />
     <Compile Include="src\gui\WeaponGroupBoxWrapper.cs" />
     <Compile Include="src\json\JsonSkillReader.cs" />
     <Compile Include="src\gui\components\RankTextBox.cs">

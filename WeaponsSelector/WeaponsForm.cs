@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using WeaponsSelector;
 using WeaponsSelector.src.gui;
 using WeaponsForm.Skills;
+using WeaponsForm.Spells;
 
 namespace WeaponsForm
 {
@@ -34,6 +35,8 @@ namespace WeaponsForm
         /// </summary>
         public JsonSkillReader JsonSkillReader { get; }
 
+        public JsonSpellReader JsonSpellReader { get; }
+
         public WeaponsForm()
         {
             //Top level form setup
@@ -45,6 +48,8 @@ namespace WeaponsForm
             this.SuspendLayout();
 
             JsonSkillReader = new JsonSkillReader();
+
+            JsonSpellReader = new JsonSpellReader();
 
             CreateHeaderFlowLayoutPanel();
 
@@ -72,6 +77,10 @@ namespace WeaponsForm
             new PhysicalMentalGroupBox(skillsFlowLayoutPanel);
 
             new MedicalGroupBox(skillsFlowLayoutPanel);
+
+            new MagicGroupBox(skillsFlowLayoutPanel);
+
+            new SpellsGroupBox(skillsFlowLayoutPanel);
 
 
 

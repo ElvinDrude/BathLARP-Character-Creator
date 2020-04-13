@@ -8,9 +8,13 @@ namespace WeaponsForm
 {
     static class Constants
     {
-        public const string Weapons = "Weapons"; //Note: Used as both a name in the JSON file and as a display string to the user
-        public const string Armour = "Armour"; //Note: Used as both a name in the JSON file and as a display string to the user
-        public const string PhysicalMental = "Physical/Mental"; //Note: Used as both a name in the JSON file and as a display string to the user
-        public const string Medical = "Medical"; //Note: Used as both a name in the JSON file and as a display string to the user
+        //Note: These constants are used as both a name in the JSON file and as a display string to the user
+        public const string Weapons = "Weapons";
+        public const string Armour = "Armour";
+        public const string PhysicalMental = "Physical/Mental"; 
+        public const string Medical = "Medical"; 
+        public const string Magic = "Magic";
+
+        public const string Spells = "Spells";
     }
 }

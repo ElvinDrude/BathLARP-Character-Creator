@@ -24,6 +24,13 @@ namespace WeaponsForm.Skills
             allSkills = AllSkills.FromJson(fileContentsString);
         }
 
+
+
+        internal SkillType GetMagicType(string magicType)
+        {
+            return allSkills.SkillCategories.Find(x => x.Category == Constants.Magic).Skills.Find(x => x.Name == magicType);
+        }
+
         internal SkillType GetMedicalType(string medicalType)
         {
             return allSkills.SkillCategories.Find(x => x.Category == Constants.Medical).Skills.Find(x => x.Name == medicalType);
@@ -71,6 +78,11 @@ namespace WeaponsForm.Skills
         internal List<SkillType> GetMedicalSkills()
         {
             return allSkills.SkillCategories.Find(x => x.Category == Constants.Medical).Skills;
+        }
+
+        internal List<SkillType> GetMagicSkills()
+        {
+            return allSkills.SkillCategories.Find(x => x.Category == Constants.Magic).Skills;
         }
     }
 

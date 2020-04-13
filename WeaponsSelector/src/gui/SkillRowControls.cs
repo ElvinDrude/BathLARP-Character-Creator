@@ -28,7 +28,7 @@ namespace WeaponsForm
             SkillTypeComboBox = new ComboBox
             {
                 Anchor = AnchorStyles.Top,
-                Name = "SkillTypeComboBox#" + skillTableLayoutPanel.RowCount.ToString(),
+                //Name = "SkillTypeComboBox#" + skillTableLayoutPanel.RowCount.ToString(),
                 MaximumSize = new Size(100, 20),
                 DropDownStyle = ComboBoxStyle.DropDownList,
                 Tag = this,
@@ -36,8 +36,8 @@ namespace WeaponsForm
 
             // Gather and list all possible skills in the combobox
             var skillTypesList = GetSkillTypesList(skillTableLayoutPanel);
-            string[] weaponsStringList = skillTypesList.ToArray().Select(weap => weap.Name).ToArray();
-            SkillTypeComboBox.Items.AddRange(weaponsStringList);
+            string[] skillTypesArray = skillTypesList.ToArray().Select(weap => weap.Name).ToArray();
+            SkillTypeComboBox.Items.AddRange(skillTypesArray);
             SkillTypeComboBox.SelectedIndex = -1;
 
             SkillTypeComboBox.SelectedValueChanged += SkillType_SelectedValueChanged;
@@ -50,7 +50,7 @@ namespace WeaponsForm
             SkillLevelControl = new SkillLevelComboBox(null)
             {
                 Anchor = AnchorStyles.Top,
-                Name = "SkillLevelComboBox#" + skillTableLayoutPanel.RowCount.ToString(),
+                //Name = "SkillLevelComboBox#" + skillTableLayoutPanel.RowCount.ToString(),
                 DropDownStyle = ComboBoxStyle.DropDownList,
                 Enabled = false, // Disabled until the SkillTypeComboBox has a value picked
                 Tag = this,
@@ -61,7 +61,7 @@ namespace WeaponsForm
             SkillCostTextBox = new TextBox
             {
                 Anchor = AnchorStyles.Top,
-                Name = "SkillCostTextBox#" + skillTableLayoutPanel.RowCount.ToString(),
+                //Name = "SkillCostTextBox#" + skillTableLayoutPanel.RowCount.ToString(),
                 Size = new Size(50, 20),
                 ReadOnly = true,
                 Tag = this,

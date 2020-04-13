@@ -23,7 +23,7 @@ namespace WeaponsForm
                 case PurchaseType.Once:
                     return CreateCheckbox(skillType);
                 case PurchaseType.CostPlusLevel:
-                    throw new NotImplementedException("No CostPlusLevel yet");
+                    return CreateCostPlusLevelNumericField(skillType);
                 case PurchaseType.CostTimesLevel:
                     return CreateCostTimesLevelNumericField(skillType);
                 case PurchaseType.CostTimesLevelPlusOne:
@@ -33,6 +33,7 @@ namespace WeaponsForm
             }
         }
 
+       
         private static Control CreateCheckbox(SkillType skillType)
         {
             return new SkillLevelCheckbox(skillType)
@@ -48,6 +49,7 @@ namespace WeaponsForm
                 Anchor = AnchorStyles.Top,
                 Minimum = 0,
                 Value = 0,
+                Maximum = 999,
             };
         }
 
@@ -58,8 +60,21 @@ namespace WeaponsForm
                 Anchor = AnchorStyles.Top,
                 Minimum = 0,
                 Value = 0,
+                Maximum = 999,
             };
         }
+
+        private static Control CreateCostPlusLevelNumericField(SkillType skillType)
+        {
+            return new SkillLevelCostPlusLevelNumericField(skillType)
+            {
+                Anchor = AnchorStyles.Top,
+                Minimum = 0,
+                Value = 0,
+                Maximum = 999,
+            };
+        }
+
 
         private static Control CreateComboBox(SkillType skillType)
         {

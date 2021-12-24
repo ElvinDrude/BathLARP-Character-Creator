@@ -7,7 +7,7 @@
                     "Name": "Trip",
                     "Levels": [
                         {
-                            "Description": 1,
+                            "Description": "(R)",
                             "Level" : 0
                         }
                     ]
@@ -21,49 +21,54 @@
                         },
                         {
                             "Description": "4",
-                            "Level": 3
+                            "Level": 1
                         },
                         {
                             "Description": "6",
-                            "Level": 6
+                            "Level": 2
                         },
                         {
                             "Description": "8",
-                            "Level": 12
-                        },
-                        {
-                            "Description": "10",
-                            "Level": 24
-                        }
-                    ]
-                },
-                 {
-                    "Name": "Strength",
-                    "Levels": [
-                        {
-                            "Description": "Single",
-                            "Level": 0
-                        },
-                        {
-                            "Description": "Double",
                             "Level": 3
                         },
                         {
-                            "Description": "Triple",
-                            "Level": 6
-                        },
-                        {
-                            "Description": "Quad",
-                            "Level": 12
-                        },
-                        {
-                            "Description": "Quint",
-                            "Level": 24
+                            "Description": "10",
+                            "Level": 4
                         }
                     ]
+                }                
+            ]
+        },
+        {
+            "School" : "Earth",
+            "Spell Chain" : [
+            {
+                   "Name": "Strength",
+                   "Levels": [
+                       {
+                           "Description": "Single",
+                           "Level": 0
+                       },
+                       {
+                           "Description": "Double",
+                           "Level": 2
+                       },
+                       {
+                           "Description": "Triple",
+                           "Level": 4
+                       },
+                       {
+                           "Description": "Quad",
+                           "Level": 6
+                       },
+                       {
+                           "Description": "Quint",
+                           "Level": 8
+                       }
+                   ]
                 }
             ]
-        }
+		}
     ]
     
 }

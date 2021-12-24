@@ -11,7 +11,7 @@ namespace WeaponsSelector.src.gui
     public abstract class SkillGroupBoxWrapper
     {
         protected GroupBox groupBox;
-        protected List<SkillRowControls> skillRowControls;
+        protected List<AbstractRowControls> skillRowControls;
         protected TableLayoutPanel tableLayoutPanel;
 
         protected SkillGroupBoxWrapper(FlowLayoutPanel flowLayoutPanel)
@@ -45,7 +45,8 @@ namespace WeaponsSelector.src.gui
             tableLayoutPanel = new TableLayoutPanel
             {
                 Dock = DockStyle.Fill,
-                ColumnCount = 3,
+                ColumnCount = 4, // Spells and Miracles use 4 columns, other sections use 3. 
+                                 // The unused column seems to have no problematic effects, if we never add anything to it it renders at 0 width
                 //Name = "UniqueStrForNow", //TODO: This used to be a string defined in WeaponsForm, and accessed in handlers...
                 AutoSize = true,
                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
@@ -53,7 +54,7 @@ namespace WeaponsSelector.src.gui
             innerFlowLayoutPanel.Controls.Add(tableLayoutPanel);
 
 
-            skillRowControls = new List<SkillRowControls>
+            skillRowControls = new List<AbstractRowControls>
             {
                 getNewSkillRowControl(tableLayoutPanel)
             };
@@ -71,7 +72,7 @@ namespace WeaponsSelector.src.gui
             groupBox.PerformLayout();
         }
 
-        internal abstract SkillRowControls getNewSkillRowControl(TableLayoutPanel tableLayoutPanel);
+        internal abstract AbstractRowControls getNewSkillRowControl(TableLayoutPanel tableLayoutPanel);
         protected void AddNewSkillRowEventHander(object sender, System.EventArgs e)
         {
             groupBox.SuspendLayout();

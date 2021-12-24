@@ -5,10 +5,11 @@ using System.Linq;
 using System.Windows.Forms;
 using WeaponsSelector;
 using WeaponsForm.Skills;
+using WeaponsSelector.src.gui;
 
 namespace WeaponsForm
 {
-    public abstract class SkillRowControls
+    public abstract class SkillRowControls : AbstractRowControls
     {
         public ComboBox SkillTypeComboBox { get; }
         //public SkillLevelComboBox SkillLevelComboBox { get; }
@@ -24,7 +25,7 @@ namespace WeaponsForm
         /// </summary>
         /// <param name="rankTextBox">The global rank text box that updates with all rank information</param>
         /// <param name="skillTableLayoutPanel">The table to which the new weapons controls will be added. Must already be added to the parent form.</param>
-        public SkillRowControls(TableLayoutPanel skillTableLayoutPanel, string skillCategoryIdentifier)
+        public SkillRowControls(TableLayoutPanel skillTableLayoutPanel, string skillCategoryIdentifier) : base(skillTableLayoutPanel)
         {
             SkillCategoryIdentifier = skillCategoryIdentifier;
 

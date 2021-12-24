@@ -19,7 +19,7 @@ namespace WeaponsSelector.src.gui
             return Constants.Weapons;
         }
 
-        internal override SkillRowControls getNewSkillRowControl(TableLayoutPanel tableLayoutPanel)
+        internal override AbstractRowControls getNewSkillRowControl(TableLayoutPanel tableLayoutPanel)
         {
             return new WeaponRowControls(tableLayoutPanel);
         }

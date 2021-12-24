@@ -14,7 +14,7 @@ namespace WeaponsSelector.src.gui
             return Constants.Medical;
         }
 
-        internal override SkillRowControls getNewSkillRowControl(TableLayoutPanel tableLayoutPanel)
+        internal override AbstractRowControls getNewSkillRowControl(TableLayoutPanel tableLayoutPanel)
         {
             return new MedicalRowControls(tableLayoutPanel);
         }

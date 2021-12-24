@@ -110,6 +110,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\gui\AbstractRowControls.cs" />
     <Compile Include="src\gui\SpellsGroupBox.cs" />
     <Compile Include="src\gui\MagicGroupBox.cs" />
     <Compile Include="src\gui\MagicRowControls.cs" />

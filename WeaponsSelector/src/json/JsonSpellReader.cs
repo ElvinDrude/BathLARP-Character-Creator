@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using WeaponsForm.Skills;
 
 namespace WeaponsForm.Spells
 {
@@ -28,10 +29,15 @@ namespace WeaponsForm.Spells
             return allSpells.SpellSchools;
         }
 
-        //internal SpellSchool GetSpellSchool(string spellSchool)
-        //{
-        //    return allSpells.SpellSchools.Find( x => x.School == Constants.)
-        //}
+        internal List<SpellChain> GetSpells(string spellSchool)
+        {
+            return allSpells.SpellSchools.Find(x => x.School == spellSchool).SpellChain;
+        }
+
+        internal List<Level> GetSpellLevels(string spellSchool, string spell)
+        {
+            return allSpells.SpellSchools.Find(x => x.School == spellSchool).SpellChain.Find(x => x.Name == spell).Levels;
+        }
 
     }
     public partial class AllSpells

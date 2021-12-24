@@ -72,8 +72,6 @@ namespace WeaponsForm
             skillsFlowLayoutPanel.ResumeLayout(false);
             skillsFlowLayoutPanel.PerformLayout();
 
-            //Start creating a box for the Physical/Mental skills - these introduce at least three new challenges...
-            //CreatePhysicalMentalGroupBox(skillsFlowLayoutPanel);
             new PhysicalMentalGroupBox(skillsFlowLayoutPanel);
 
             new MedicalGroupBox(skillsFlowLayoutPanel);

@@ -15,7 +15,7 @@ namespace WeaponsForm
             return Constants.Spells;
         }
 
-        internal override SkillRowControls getNewSkillRowControl(TableLayoutPanel tableLayoutPanel)
+        internal override AbstractRowControls getNewSkillRowControl(TableLayoutPanel tableLayoutPanel)
         {
             return new SpellsRowControls(tableLayoutPanel);
         }

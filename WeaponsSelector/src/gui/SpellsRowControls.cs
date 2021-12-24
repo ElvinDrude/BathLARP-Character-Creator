@@ -22,8 +22,15 @@ namespace WeaponsForm
 
         public TextBox SkillCostTextBox { get; }
 
-        public SpellsRowControls(TableLayoutPanel skillTableLayoutPanel) : base(skillTableLayoutPanel)
+        /// <summary>
+        /// Either the Spells or Miracles reader
+        /// </summary>
+        private JsonCastingReader JsonCastingReader;
+
+        public SpellsRowControls(TableLayoutPanel skillTableLayoutPanel, JsonCastingReader jsonReader) : base(skillTableLayoutPanel)
         {
+            JsonCastingReader = jsonReader;
+
             skillTableLayoutPanel.RowCount += 1;
 
             SpellSchoolComboBox = new ComboBox
@@ -89,7 +96,7 @@ namespace WeaponsForm
 
         internal List<SpellSchool> GetSpellSchools(TableLayoutPanel skillTableLayoutPanel)
         {
-            return (skillTableLayoutPanel.FindForm() as WeaponsForm).JsonSpellReader.GetSpellSchools();
+            return JsonCastingReader.GetSpellSchools();
         }
 
         /// <summary>
@@ -99,7 +106,7 @@ namespace WeaponsForm
         /// <param name="e"></param>
         private void SpellSchool_SelectedValueChanged(object sender, EventArgs e)
         {
-            var spellsList = (SpellSchoolComboBox.FindForm() as WeaponsForm).JsonSpellReader.GetSpells((string)SpellSchoolComboBox.SelectedItem);
+            var spellsList = JsonCastingReader.GetSpells((string)SpellSchoolComboBox.SelectedItem);
 
             string[] spellsArray = spellsList.ToArray().Select(item => item.Name).ToArray();
             SpellComboBox.Items.Clear();
@@ -117,7 +124,7 @@ namespace WeaponsForm
         /// <param name="e"></param>
         private void Spell_SelectedValueChanged(object sender, EventArgs e)
         {
-            var levelsList = (SpellComboBox.FindForm() as WeaponsForm).JsonSpellReader.GetSpellLevels((string)SpellSchoolComboBox.SelectedItem, (string)SpellComboBox.SelectedItem);
+            var levelsList = JsonCastingReader.GetSpellLevels((string)SpellSchoolComboBox.SelectedItem, (string)SpellComboBox.SelectedItem);
 
             string[] spellsArray = levelsList.ToArray().Select(item => item.Description).ToArray();
             SpellLevelComboBox.Items.AddRange(spellsArray);
@@ -130,9 +137,10 @@ namespace WeaponsForm
         private void SpellLevel_SelectedValueChanged(object sender, EventArgs e)
         {
             //TODO: Should constant the "Learn Spell" one, and also one for "Learn Miracle"
-            var spellLevelCost = (SpellComboBox.FindForm() as WeaponsForm).JsonSkillReader.GetSkillType(Constants.Special, "Learn Spell");
+            string skillName = JsonCastingReader is JsonSpellReader ? "Learn Spell" : "Learn Miracle";
+            var spellLevelCost = (SpellComboBox.FindForm() as WeaponsForm).JsonSkillReader.GetSkillType(Constants.Special, skillName);
 
-            var levelsList = (SpellComboBox.FindForm() as WeaponsForm).JsonSpellReader.GetSpellLevels((string)SpellSchoolComboBox.SelectedItem, (string)SpellComboBox.SelectedItem);
+            var levelsList = JsonCastingReader.GetSpellLevels((string)SpellSchoolComboBox.SelectedItem, (string)SpellComboBox.SelectedItem);
 
             // Keep track of the cost up to and including the purchased level
             long runningCost = 0;

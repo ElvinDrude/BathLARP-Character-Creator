@@ -17,7 +17,7 @@ namespace WeaponsForm
 
         internal override AbstractRowControls getNewSkillRowControl(TableLayoutPanel tableLayoutPanel)
         {
-            return new SpellsRowControls(tableLayoutPanel);
+            return new SpellsRowControls(tableLayoutPanel,(tableLayoutPanel.FindForm() as WeaponsForm).JsonSpellReader);
         }
     }
 }

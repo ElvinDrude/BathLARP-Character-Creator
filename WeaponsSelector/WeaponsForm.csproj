@@ -111,6 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\gui\AbstractRowControls.cs" />
+    <Compile Include="src\gui\MiraclesGroupBox.cs" />
     <Compile Include="src\gui\SpellsGroupBox.cs" />
     <Compile Include="src\gui\MagicGroupBox.cs" />
     <Compile Include="src\gui\MagicRowControls.cs" />
@@ -131,12 +132,12 @@
     <Compile Include="src\gui\SkillRowControls.cs" />
     <Compile Include="src\gui\SpellsRowControls.cs" />
     <Compile Include="src\gui\WeaponGroupBoxWrapper.cs" />
+    <Compile Include="src\json\JsonCastingReader.cs" />
     <Compile Include="src\json\JsonSkillReader.cs" />
     <Compile Include="src\gui\components\RankTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="src\gui\WeaponRowControls.cs" />
-    <Compile Include="src\json\JsonSpellReader.cs" />
     <Compile Include="WeaponsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -150,6 +151,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="JSON\Miracles.json" />
     <None Include="JSON\Spells.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

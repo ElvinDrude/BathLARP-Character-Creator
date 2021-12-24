@@ -1,23 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using WeaponsForm.Skills;
 
 namespace WeaponsForm.Spells
 {
-    public class JsonSpellReader
+    /// <summary>
+    /// JSON reader handler for Miracles and Spells
+    /// Splitting the Spells and Miracles to make the JSON files smaller, and remove the need to filter between the two 
+    /// separate lists at runtime.
+    /// </summary>
+    public class JsonCastingReader
     {
-        //private readonly List<Weapon> weapons;
         private readonly AllSpells allSpells;
 
-        public JsonSpellReader()
+        public JsonCastingReader(string fileLoc)
         {
-            string fileLoc = "C:\\Users\\Elvin\\source\\repos\\PictureViewer\\WeaponsSelector\\JSON\\Spells.json";
             var fileContentsList = File.ReadAllLines(fileLoc).ToList();
             fileContentsList.RemoveAll(x => x.Trim().StartsWith("//"));
             string fileContentsString = String.Join("", fileContentsList);
@@ -40,6 +43,24 @@ namespace WeaponsForm.Spells
         }
 
     }
+
+    public class JsonSpellReader : JsonCastingReader
+    {
+        public JsonSpellReader() : base("C:\\Users\\Elvin\\source\\repos\\PictureViewer\\WeaponsSelector\\JSON\\Spells.json")
+        {
+
+        }
+    }
+
+    public class JsonMiracleReader : JsonCastingReader
+    {
+        public JsonMiracleReader() : base("C:\\Users\\Elvin\\source\\repos\\PictureViewer\\WeaponsSelector\\JSON\\Miracles.json")
+        {
+
+        }
+    }
+
+
     public partial class AllSpells
     {
         [JsonProperty("Spell Schools", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
@@ -97,3 +118,4 @@ namespace WeaponsForm.Spells
     }
 
 }
+

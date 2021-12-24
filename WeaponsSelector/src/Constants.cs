@@ -20,5 +20,6 @@ namespace WeaponsForm
 
         //Constants below here are not used in JSON, only as user display strings.
         public const string Spells = "Spells";
+        public const string Miracles = "Miracles";
     }
 }

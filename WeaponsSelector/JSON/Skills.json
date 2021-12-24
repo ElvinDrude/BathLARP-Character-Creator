@@ -244,6 +244,11 @@
                     "Name" : "Learn Spell",
                     "Purchase type" : "CostTimesLevelPlusOne",
                     "Cost" : 6
+                },
+                {
+                    "Name" : "Learn Miracle",
+                    "Purchase type" : "CostTimesLevelPlusOne",
+                    "Cost" : 7
                 }
             ]
         }

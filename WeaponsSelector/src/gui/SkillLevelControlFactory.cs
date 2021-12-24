@@ -26,6 +26,8 @@ namespace WeaponsForm
                     return CreateCostPlusLevelNumericField(skillType);
                 case PurchaseType.CostTimesLevel:
                     return CreateCostTimesLevelNumericField(skillType);
+                // TODO: This was never actually used - spells were encapsulated inside the SpellRowControls
+                // Probably should look at re-using this, if appropraite
                 case PurchaseType.CostTimesLevelPlusOne:
                     throw new NotImplementedException("No CostTimesLevelPlusOne yet");
                 default:

@@ -37,6 +37,8 @@ namespace WeaponsForm
 
         public JsonSpellReader JsonSpellReader { get; }
 
+        public JsonMiracleReader JsonMiracleReader { get; }
+
         public WeaponsForm()
         {
             //Top level form setup
@@ -50,6 +52,8 @@ namespace WeaponsForm
             JsonSkillReader = new JsonSkillReader();
 
             JsonSpellReader = new JsonSpellReader();
+
+            JsonMiracleReader = new JsonMiracleReader();
 
             CreateHeaderFlowLayoutPanel();
 
@@ -79,6 +83,8 @@ namespace WeaponsForm
             new MagicGroupBox(skillsFlowLayoutPanel);
 
             new SpellsGroupBox(skillsFlowLayoutPanel);
+
+            new MiraclesGroupBox(skillsFlowLayoutPanel);
 
 
 

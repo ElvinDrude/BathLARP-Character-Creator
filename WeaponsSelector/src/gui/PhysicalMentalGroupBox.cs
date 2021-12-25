@@ -17,7 +17,7 @@ namespace WeaponsSelector.src.gui
             return Constants.PhysicalMental;
         }
 
-        internal override SkillRowControls getNewSkillRowControl(TableLayoutPanel tableLayoutPanel)
+        internal override AbstractRowControls getNewSkillRowControl(TableLayoutPanel tableLayoutPanel)
         {
             return new PhysicalMentalRowControls(tableLayoutPanel);
         }

@@ -213,9 +213,42 @@
             "Category" : "Magic", 
             "Type" : [
                 {
+                    "Name" : "Recognise Magic",
+                    "Purchase type" : "Once",
+                    "Cost" : 4
+                },
+                {
+                    "Name" : "Read/Write School Runes",
+                    "Purchase type" : "Once",
+                    "Cost" : 4
+                },
+                {
+                    "Name" : "Enhance Mana",
+                    "Purchase type" : "Threshold",
+                    "Cost" : 1,
+                    "Threshold" : 100
+                },
+                {
+                    "Name" : "Create Talisman",
+                    "Purchase type" : "CostPlusLevel",
+                    "Cost" : 6
+                }
+            ]
+        },
+        {
+            // These are for skills that aren't directly purchaseable as such, they're used in conjunction
+            // with other information in order to actually be useful.
+            "Category" : "Special",
+            "Type" : [
+                {
                     "Name" : "Learn Spell",
                     "Purchase type" : "CostTimesLevelPlusOne",
                     "Cost" : 6
+                },
+                {
+                    "Name" : "Learn Miracle",
+                    "Purchase type" : "CostTimesLevelPlusOne",
+                    "Cost" : 7
                 }
             ]
         }

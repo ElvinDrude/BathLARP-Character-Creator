@@ -1,0 +1,74 @@
+{
+    "Spell Schools": [
+        {
+            "School" : "Water",
+            "Spell Chain" : [
+                {
+                    "Name": "Trip",
+                    "Levels": [
+                        {
+                            "Description": "(R)",
+                            "Level" : 0
+                        }
+                    ]
+                },
+                {
+                    "Name": "Ice Dart",
+                    "Levels": [
+                        {
+                            "Description": "2",
+                            "Level": 0
+                        },
+                        {
+                            "Description": "4",
+                            "Level": 1
+                        },
+                        {
+                            "Description": "6",
+                            "Level": 2
+                        },
+                        {
+                            "Description": "8",
+                            "Level": 3
+                        },
+                        {
+                            "Description": "10",
+                            "Level": 4
+                        }
+                    ]
+                }                
+            ]
+        },
+        {
+            "School" : "Earth",
+            "Spell Chain" : [
+            {
+                   "Name": "Strength",
+                   "Levels": [
+                       {
+                           "Description": "Single",
+                           "Level": 0
+                       },
+                       {
+                           "Description": "Double",
+                           "Level": 2
+                       },
+                       {
+                           "Description": "Triple",
+                           "Level": 4
+                       },
+                       {
+                           "Description": "Quad",
+                           "Level": 6
+                       },
+                       {
+                           "Description": "Quint",
+                           "Level": 8
+                       }
+                   ]
+                }
+            ]
+		}
+    ]
+    
+}

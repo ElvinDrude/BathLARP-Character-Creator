@@ -1,0 +1,78 @@
+{
+    "Spell Schools": [
+        {
+            "School" : "Chaos",
+            "Spell Chain" : [
+                {
+                    "Name": "Destroy",
+                    "Levels": [
+                        {
+                            "Description": "(T)",
+                            "Level" : 0
+                        },
+                        {
+                            "Description": "(R)",
+                            "Level" : 1
+                        }
+                    ]
+                },
+                {
+                    "Name": "Disruption",
+                    "Levels": [
+                        {
+                            "Description": "2",
+                            "Level": 2
+                        },
+                        {
+                            "Description": "4",
+                            "Level": 3
+                        },
+                        {
+                            "Description": "6",
+                            "Level": 4
+                        },
+                        {
+                            "Description": "8",
+                            "Level": 5
+                        },
+                        {
+                            "Description": "10",
+                            "Level": 6
+                        }
+                    ]
+                }                
+            ]
+        },
+        {
+            "School" : "Order",
+            "Spell Chain" : [
+            {
+                   "Name": "Strength",
+                   "Levels": [
+                       {
+                           "Description": "Single",
+                           "Level": 0
+                       },
+                       {
+                           "Description": "Double",
+                           "Level": 2
+                       },
+                       {
+                           "Description": "Triple",
+                           "Level": 4
+                       },
+                       {
+                           "Description": "Quad",
+                           "Level": 6
+                       },
+                       {
+                           "Description": "Quint",
+                           "Level": 8
+                       }
+                   ]
+                }
+            ]
+		}
+    ]
+    
+}

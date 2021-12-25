@@ -8,20 +8,20 @@ using WeaponsForm;
 
 namespace WeaponsSelector.src.gui
 {
-    class WeaponGroupBoxWrapper : SkillGroupBoxWrapper
+    class MagicGroupBox : SkillGroupBoxWrapper
     {
-        public WeaponGroupBoxWrapper(FlowLayoutPanel flowLayoutPanel) : base(flowLayoutPanel)
+        public MagicGroupBox(FlowLayoutPanel flowLayoutPanel) : base(flowLayoutPanel)
         {
         }
 
         protected override string getGroupBoxText()
         {
-            return Constants.Weapons;
+            return Constants.Magic;
         }
 
         internal override AbstractRowControls getNewSkillRowControl(TableLayoutPanel tableLayoutPanel)
         {
-            return new WeaponRowControls(tableLayoutPanel);
+            return new MagicRowControls(tableLayoutPanel);
         }
     }
 }

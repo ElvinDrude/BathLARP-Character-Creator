@@ -28,6 +28,11 @@ namespace WeaponsForm
                 {
                     totalRank += result;
                 }
+                // We don't catch a failure as we often have a lot of empty textboxes - perhaps specifically look for ""?
+                //else
+                //{
+                //    throw new Exception("Unable to parse as integer: " + control.Text);
+                //}
 
             }
 

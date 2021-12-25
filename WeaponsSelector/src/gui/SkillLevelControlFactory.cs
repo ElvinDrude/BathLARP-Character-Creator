@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WeaponsForm.Skills;
 
 namespace WeaponsForm
 {
@@ -22,9 +23,11 @@ namespace WeaponsForm
                 case PurchaseType.Once:
                     return CreateCheckbox(skillType);
                 case PurchaseType.CostPlusLevel:
-                    throw new NotImplementedException("No CostPlusLevel yet");
+                    return CreateCostPlusLevelNumericField(skillType);
                 case PurchaseType.CostTimesLevel:
                     return CreateCostTimesLevelNumericField(skillType);
+                // TODO: This was never actually used - spells were encapsulated inside the SpellRowControls
+                // Probably should look at re-using this, if appropraite
                 case PurchaseType.CostTimesLevelPlusOne:
                     throw new NotImplementedException("No CostTimesLevelPlusOne yet");
                 default:
@@ -32,6 +35,7 @@ namespace WeaponsForm
             }
         }
 
+       
         private static Control CreateCheckbox(SkillType skillType)
         {
             return new SkillLevelCheckbox(skillType)
@@ -47,6 +51,7 @@ namespace WeaponsForm
                 Anchor = AnchorStyles.Top,
                 Minimum = 0,
                 Value = 0,
+                Maximum = 999,
             };
         }
 
@@ -57,8 +62,21 @@ namespace WeaponsForm
                 Anchor = AnchorStyles.Top,
                 Minimum = 0,
                 Value = 0,
+                Maximum = 999,
             };
         }
+
+        private static Control CreateCostPlusLevelNumericField(SkillType skillType)
+        {
+            return new SkillLevelCostPlusLevelNumericField(skillType)
+            {
+                Anchor = AnchorStyles.Top,
+                Minimum = 0,
+                Value = 0,
+                Maximum = 999,
+            };
+        }
+
 
         private static Control CreateComboBox(SkillType skillType)
         {

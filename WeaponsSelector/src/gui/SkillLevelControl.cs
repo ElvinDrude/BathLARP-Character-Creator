@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WeaponsForm.Skills;
 
 namespace WeaponsForm
 {
@@ -151,9 +152,26 @@ namespace WeaponsForm
         public override long GetSkillLevelCost()
         {
             // Triangular numbers formula: cost * .5 * N * (N+1), where N is number of levels to purchase
+            //TODO: Do this but with less casting. Applies to most of these calculations!
             double cost = SkillType.Cost.GetValueOrDefault() * 0.5 * Decimal.ToDouble(this.Value) * Decimal.ToDouble(this.Value + 1);
             return (long)cost;
 
+        }
+    }
+
+    public class SkillLevelCostPlusLevelNumericField : SkillLevelNumericField
+    {
+        public SkillLevelCostPlusLevelNumericField(SkillType skill) : base(skill)
+        {
+
+        }
+
+        public override long GetSkillLevelCost()
+        {
+            double level = Decimal.ToDouble(this.Value) * SkillType.Cost.GetValueOrDefault();
+            double trinaglePart = 0.5 * Decimal.ToDouble(this.Value) * Decimal.ToDouble(this.Value + 1);
+
+            return (long)level + (long)trinaglePart;
         }
     }
 

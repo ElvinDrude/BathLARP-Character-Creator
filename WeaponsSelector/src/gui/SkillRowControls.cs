@@ -4,15 +4,20 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using WeaponsSelector;
+using WeaponsForm.Skills;
+using WeaponsSelector.src.gui;
 
 namespace WeaponsForm
 {
-    public abstract class SkillRowControls
+    public abstract class SkillRowControls : AbstractRowControls
     {
         public ComboBox SkillTypeComboBox { get; }
         //public SkillLevelComboBox SkillLevelComboBox { get; }
         public Control SkillLevelControl { get; set; }
         public TextBox SkillCostTextBox { get; }
+
+        // A string that identifies the subclass's actual type (weapons, armour, etc.).
+        protected string SkillCategoryIdentifier;
 
         /// <summary>
         /// Create a new set of components defining a skill, and make them a new row at the bottom of
@@ -20,14 +25,16 @@ namespace WeaponsForm
         /// </summary>
         /// <param name="rankTextBox">The global rank text box that updates with all rank information</param>
         /// <param name="skillTableLayoutPanel">The table to which the new weapons controls will be added. Must already be added to the parent form.</param>
-        public SkillRowControls(TableLayoutPanel skillTableLayoutPanel)
+        public SkillRowControls(TableLayoutPanel skillTableLayoutPanel, string skillCategoryIdentifier) : base(skillTableLayoutPanel)
         {
+            SkillCategoryIdentifier = skillCategoryIdentifier;
+
             skillTableLayoutPanel.RowCount += 1;
 
             SkillTypeComboBox = new ComboBox
             {
                 Anchor = AnchorStyles.Top,
-                Name = "SkillTypeComboBox#" + skillTableLayoutPanel.RowCount.ToString(),
+                //Name = "SkillTypeComboBox#" + skillTableLayoutPanel.RowCount.ToString(),
                 MaximumSize = new Size(100, 20),
                 DropDownStyle = ComboBoxStyle.DropDownList,
                 Tag = this,
@@ -35,8 +42,8 @@ namespace WeaponsForm
 
             // Gather and list all possible skills in the combobox
             var skillTypesList = GetSkillTypesList(skillTableLayoutPanel);
-            string[] weaponsStringList = skillTypesList.ToArray().Select(weap => weap.Name).ToArray();
-            SkillTypeComboBox.Items.AddRange(weaponsStringList);
+            string[] skillTypesArray = skillTypesList.ToArray().Select(weap => weap.Name).ToArray();
+            SkillTypeComboBox.Items.AddRange(skillTypesArray);
             SkillTypeComboBox.SelectedIndex = -1;
 
             SkillTypeComboBox.SelectedValueChanged += SkillType_SelectedValueChanged;
@@ -49,7 +56,7 @@ namespace WeaponsForm
             SkillLevelControl = new SkillLevelComboBox(null)
             {
                 Anchor = AnchorStyles.Top,
-                Name = "SkillLevelComboBox#" + skillTableLayoutPanel.RowCount.ToString(),
+                //Name = "SkillLevelComboBox#" + skillTableLayoutPanel.RowCount.ToString(),
                 DropDownStyle = ComboBoxStyle.DropDownList,
                 Enabled = false, // Disabled until the SkillTypeComboBox has a value picked
                 Tag = this,
@@ -60,7 +67,7 @@ namespace WeaponsForm
             SkillCostTextBox = new TextBox
             {
                 Anchor = AnchorStyles.Top,
-                Name = "SkillCostTextBox#" + skillTableLayoutPanel.RowCount.ToString(),
+                //Name = "SkillCostTextBox#" + skillTableLayoutPanel.RowCount.ToString(),
                 Size = new Size(50, 20),
                 ReadOnly = true,
                 Tag = this,
@@ -80,9 +87,25 @@ namespace WeaponsForm
         /// </summary>
         /// <param name="skillTableLayoutPanel">The table that will be used to find the parent WeaponsForm.</param>
         /// <returns></returns>
-        internal abstract List<SkillType> GetSkillTypesList(TableLayoutPanel skillTableLayoutPanel);
+        //internal abstract List<SkillType> GetSkillTypesList(TableLayoutPanel skillTableLayoutPanel);
+        //TODO: SpellRowControls need this to be virtual. Might hae to split those out more sensibly?
+        internal virtual List<SkillType> GetSkillTypesList(TableLayoutPanel skillTableLayoutPanel)
+        {
+            if (SkillCategoryIdentifier == null)
+            {
+                throw new ArgumentNullException("Skill category identifier not set!");
+            }
+            return (skillTableLayoutPanel.FindForm() as WeaponsForm).JsonSkillReader.GetSkillTypeList(SkillCategoryIdentifier);
+        }
 
-        internal abstract SkillType GetSkillType(string weaponType);
+        internal virtual SkillType GetSkillType(string skillType)
+        {
+            if (SkillCategoryIdentifier == null)
+            {
+                throw new ArgumentNullException("Skill category identifier not set!");
+            }
+            return (SkillLevelControl.FindForm() as WeaponsForm).JsonSkillReader.GetSkillType(SkillCategoryIdentifier, skillType);
+        }
 
         //internal void PopulateValidSkills(SkillType type)
         //{
@@ -100,6 +123,7 @@ namespace WeaponsForm
                 ComboBox SkillTypeComboBox = sender as ComboBox;
                 //var weaponRowControls = SkillTypeComboBox.Tag as SkillRowControls;
 
+                //TODO: What's this doing? Why do I disable the box?
                 if (String.IsNullOrEmpty(SkillTypeComboBox.SelectedItem as string))
                 {
                     SkillLevelControl.Enabled = false;

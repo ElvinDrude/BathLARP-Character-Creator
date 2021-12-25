@@ -5,8 +5,6 @@ namespace WeaponsSelector.src.gui
 {
     internal class MedicalGroupBox : SkillGroupBoxWrapper
     {
-        private FlowLayoutPanel skillsFlowLayoutPanel;
-
         public MedicalGroupBox(FlowLayoutPanel skillsFlowLayoutPanel) : base(skillsFlowLayoutPanel)
         {
         }
@@ -16,7 +14,7 @@ namespace WeaponsSelector.src.gui
             return Constants.Medical;
         }
 
-        internal override SkillRowControls getNewSkillRowControl(TableLayoutPanel tableLayoutPanel)
+        internal override AbstractRowControls getNewSkillRowControl(TableLayoutPanel tableLayoutPanel)
         {
             return new MedicalRowControls(tableLayoutPanel);
         }

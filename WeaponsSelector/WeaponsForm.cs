@@ -9,14 +9,13 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using WeaponsSelector;
 using WeaponsSelector.src.gui;
+using WeaponsForm.Skills;
+using WeaponsForm.Spells;
 
 namespace WeaponsForm
 {
     public class WeaponsForm : Form
     {
-        private TableLayoutPanel tableLayoutPanel;
-        //private TableLayoutPanel armourTableLayoutPanel;
-
         private FlowLayoutPanel headerFlowLayoutPanel;
 
         /// <summary>
@@ -25,13 +24,15 @@ namespace WeaponsForm
         //TODO: Re-work this to remove the need for set - currently used in CreateHeaderFlowLayoutPanel
         public RankTextBox RankTextBox { get; private set; }
 
-        //private IList<WeaponRowControls> weaponRowControls;
-        //private IList<ArmourRowControls> armourRowControls;
 
         /// <summary>
         /// The current version of the JSON skill costs that all parts of the application should read from
         /// </summary>
         public JsonSkillReader JsonSkillReader { get; }
+
+        public JsonSpellReader JsonSpellReader { get; }
+
+        public JsonMiracleReader JsonMiracleReader { get; }
 
         public WeaponsForm()
         {
@@ -45,9 +46,12 @@ namespace WeaponsForm
 
             JsonSkillReader = new JsonSkillReader();
 
+            JsonSpellReader = new JsonSpellReader();
+
+            JsonMiracleReader = new JsonMiracleReader();
+
             CreateHeaderFlowLayoutPanel();
 
-            // Trying out a vertical flowlayoutpanel for weapons+armour skills...
             var skillsFlowLayoutPanel = new FlowLayoutPanel
             {
                 Anchor = AnchorStyles.Left,
@@ -66,11 +70,15 @@ namespace WeaponsForm
             skillsFlowLayoutPanel.ResumeLayout(false);
             skillsFlowLayoutPanel.PerformLayout();
 
-            //Start creating a box for the Physical/Mental skills - these introduce at least three new challenges...
-            //CreatePhysicalMentalGroupBox(skillsFlowLayoutPanel);
             new PhysicalMentalGroupBox(skillsFlowLayoutPanel);
 
             new MedicalGroupBox(skillsFlowLayoutPanel);
+
+            new MagicGroupBox(skillsFlowLayoutPanel);
+
+            new SpellsGroupBox(skillsFlowLayoutPanel);
+
+            new MiraclesGroupBox(skillsFlowLayoutPanel);
 
 
 

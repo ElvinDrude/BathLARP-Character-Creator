@@ -16,9 +16,6 @@ namespace WeaponsForm
 {
     public class WeaponsForm : Form
     {
-        //private TableLayoutPanel tableLayoutPanel;
-        //private TableLayoutPanel armourTableLayoutPanel;
-
         private FlowLayoutPanel headerFlowLayoutPanel;
 
         /// <summary>
@@ -27,8 +24,6 @@ namespace WeaponsForm
         //TODO: Re-work this to remove the need for set - currently used in CreateHeaderFlowLayoutPanel
         public RankTextBox RankTextBox { get; private set; }
 
-        //private IList<WeaponRowControls> weaponRowControls;
-        //private IList<ArmourRowControls> armourRowControls;
 
         /// <summary>
         /// The current version of the JSON skill costs that all parts of the application should read from
@@ -57,7 +52,6 @@ namespace WeaponsForm
 
             CreateHeaderFlowLayoutPanel();
 
-            // Trying out a vertical flowlayoutpanel for weapons+armour skills...
             var skillsFlowLayoutPanel = new FlowLayoutPanel
             {
                 Anchor = AnchorStyles.Left,

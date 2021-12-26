@@ -38,31 +38,42 @@ namespace WeaponsForm
         {
             //Top level form setup
             this.AutoScaleMode = AutoScaleMode.Font;
-            this.ClientSize = new Size(800, 600);
+            this.ClientSize = new Size(1000, 1000);
             this.Name = "Monster Generator";
             this.Text = "Monster Generator";
 
-            this.SuspendLayout();
-
             JsonSkillReader = new JsonSkillReader();
-
             JsonSpellReader = new JsonSpellReader();
-
             JsonMiracleReader = new JsonMiracleReader();
 
-            CreateHeaderFlowLayoutPanel();
+            this.SuspendLayout();
+
+            var mainFlowLayoutPanel = new FlowLayoutPanel
+            {
+                Dock = DockStyle.Fill,
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                FlowDirection = FlowDirection.TopDown,
+                AutoScroll = true,
+            };
+            this.Controls.Add(mainFlowLayoutPanel);
+
+
+            CreateHeaderFlowLayoutPanel(mainFlowLayoutPanel);
 
             var skillsFlowLayoutPanel = new FlowLayoutPanel
             {
                 Anchor = AnchorStyles.Left,
+                Dock = DockStyle.Left,
                 FlowDirection = FlowDirection.TopDown,
                 AutoSize = true,
                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
-                Location = new Point(0, headerFlowLayoutPanel.Height),
+                //Location = new Point(0, headerFlowLayoutPanel.Height),
+                BorderStyle = BorderStyle.FixedSingle,
             };
 
             skillsFlowLayoutPanel.SuspendLayout();
-            this.Controls.Add(skillsFlowLayoutPanel);
+            mainFlowLayoutPanel.Controls.Add(skillsFlowLayoutPanel);
 
             new WeaponGroupBoxWrapper(skillsFlowLayoutPanel);
             new ArmourGroupBoxWrapper(skillsFlowLayoutPanel);
@@ -81,20 +92,42 @@ namespace WeaponsForm
             new MiraclesGroupBox(skillsFlowLayoutPanel);
 
 
+            //var outputFlowLayoutPanel = new FlowLayoutPanel
+            //{
+            //    Dock = DockStyle.Right,
+            //    Anchor = AnchorStyles.Right | AnchorStyles.Top,
+            //    FlowDirection = FlowDirection.TopDown,
+            //    AutoSize = true,
+            //    AutoSizeMode = AutoSizeMode.GrowAndShrink,
+            //};
+            //this.Controls.Add(outputFlowLayoutPanel);
+
+
+            //var outputTextBox = new TextBox
+            //{
+            //    AutoSize = true,
+            //    Multiline = true,
+            //    ScrollBars = ScrollBars.Both,
+
+            //};
+            //outputFlowLayoutPanel.Controls.Add(outputTextBox);
+
 
             this.ResumeLayout();
         }
 
 
-        private void CreateHeaderFlowLayoutPanel()
+        private void CreateHeaderFlowLayoutPanel(FlowLayoutPanel mainFlowLayoutPanel)
         {
             headerFlowLayoutPanel = new FlowLayoutPanel
             {
                 Dock = DockStyle.Top,
-                //AutoSize = true,
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
                 Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top,
                 Name = "HeaderFlowLayoutPanel",
-                Size = new Size(this.Width, 50)
+                BorderStyle = BorderStyle.FixedSingle,
+                Width = this.Width,
             };
             headerFlowLayoutPanel.SuspendLayout();
 
@@ -130,7 +163,7 @@ namespace WeaponsForm
             };
             headerFlowLayoutPanel.Controls.Add(RankTextBox);
 
-            this.Controls.Add(headerFlowLayoutPanel);
+            mainFlowLayoutPanel.Controls.Add(headerFlowLayoutPanel);
 
             headerFlowLayoutPanel.ResumeLayout(false);
             headerFlowLayoutPanel.PerformLayout();

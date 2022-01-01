@@ -5,9 +5,14 @@ using WeaponsForm.Skills;
 using System.Drawing;
 using System.Linq;
 using WeaponsForm.Spells;
+using WeaponsForm.character.record;
+using WeaponsSelector.src.character.record;
 
 namespace WeaponsForm
 {
+    /// <summary>
+    /// The controls for the Spells and Miracles section. These require 4 drop-downs, hence are split from the SkillRowControls.
+    /// </summary>
     internal class SpellsRowControls : AbstractRowControls
     {
         //TODO: review visibility modifiers
@@ -91,7 +96,7 @@ namespace WeaponsForm
 
             skillTableLayoutPanel.Controls.Add(SkillCostTextBox, 3, skillTableLayoutPanel.RowCount);
 
-            (SkillCostTextBox.FindForm() as WeaponsForm).RankTextBox.RegisterRankCostTextBox(SkillCostTextBox);
+            //(SkillCostTextBox.FindForm() as WeaponsForm).RankTextBox.RegisterRankCostTextBox(SkillCostTextBox);
         }
 
         internal List<SpellSchool> GetSpellSchools(TableLayoutPanel skillTableLayoutPanel)
@@ -146,7 +151,7 @@ namespace WeaponsForm
             long runningCost = 0;
             foreach (Spells.Level l in levelsList)
             {
-                //TODO: Revisit the ? operators in teh skill definitions...
+                //TODO: Revisit the ? operators in the skill definitions...
                 runningCost += spellLevelCost.Cost.GetValueOrDefault() * (l.LevelLevel.GetValueOrDefault() + 1);
 
                 if (l.Description == (string)SpellLevelComboBox.SelectedItem)
@@ -157,6 +162,12 @@ namespace WeaponsForm
             }
 
             SkillCostTextBox.Text = runningCost.ToString();
+
+            var displayString = SpellComboBox.SelectedItem + " " + SpellLevelComboBox.SelectedItem;
+
+            var record = SkillRecordFactory.createSkillRecord(runningCost, this, displayString);
+
+            (SkillCostTextBox.FindForm() as WeaponsForm).SkillsList.Add(record);
 
         }
     }

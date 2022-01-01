@@ -69,7 +69,7 @@
             "Category" : "Armour",
             "Type" : [
                 {
-                    "Name": "Fur",
+                    "Name": "Furs",
                     "Purchase type" : "Levels",
                     "Levels": [
                         {
@@ -77,15 +77,15 @@
                             "Cost": 0
                         },
                         {
-                            "Level": "Prof",
+                            "Level": "Proficiency",
                             "Cost": 2
                         },
                         {
-                            "Level": "Spec",
+                            "Level": "Specialisation",
                             "Cost": 4
                         },
                         {
-                            "Level": "Exp",
+                            "Level": "Expertise",
                             "Cost": 8
                         },
                         {
@@ -103,15 +103,15 @@
                             "Cost": 0
                         },
                         {
-                            "Level": "Prof",
+                            "Level": "Proficiency",
                             "Cost": 6
                         },
                         {
-                            "Level": "Spec",
+                            "Level": "Specialisation",
                             "Cost": 12
                         },
                         {
-                            "Level": "Exp",
+                            "Level": "Expertise",
                             "Cost": 24
                         },
                         {
@@ -119,7 +119,12 @@
                             "Cost": 48
                         }
                     ]
-                }
+                },
+                {
+                    "Name" : "Combination",
+                    "Purchase type" : "Once",
+                    "Cost" : 10
+                },
             ]
         },
         {

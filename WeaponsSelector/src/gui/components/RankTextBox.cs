@@ -1,42 +1,51 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WeaponsForm.character.record;
 
 namespace WeaponsForm
 {
     public class RankTextBox : TextBox
     {
-        private List<Control> knownControls = new List<Control>();
+        //private List<Control> knownControls = new List<Control>();
 
-        public void RegisterRankCostTextBox(TextBox textBox)
+        //TODO: Its silly to pass the panel here. Just pass the list!
+        public RankTextBox(FlowLayoutPanel headerFlowLayoutPanel) : base()
         {
-            textBox.TextChanged += new EventHandler(UpdateTotalRank);
-
-            knownControls.Add(textBox);
+            (headerFlowLayoutPanel.FindForm() as WeaponsForm).SkillsList.CollectionChanged += RankTextBox_SkillsListChanged;
         }
 
-        private void UpdateTotalRank(object sender, EventArgs e)
-        {
-            int totalRank = 0;
-            foreach (Control control in knownControls)
-            {
-                if (Int32.TryParse(control.Text, out int result))
-                {
-                    totalRank += result;
-                }
-                // We don't catch a failure as we often have a lot of empty textboxes - perhaps specifically look for ""?
-                //else
-                //{
-                //    throw new Exception("Unable to parse as integer: " + control.Text);
-                //}
 
+        //public void RegisterRankCostTextBox(TextBox textBox)
+        //{
+        //    textBox.TextChanged += new EventHandler(UpdateTotalRank);
+
+        //    knownControls.Add(textBox);
+        //}
+
+        private void RankTextBox_SkillsListChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            long totalRank = 0;
+            var skillsList = (sender as ObservableCollection<SkillRecord>);
+
+            // The list may have null entries, filter them before costing
+            var filteredList = skillsList.Where(x => x != null);
+
+            foreach (SkillRecord skill in filteredList)
+            {
+                totalRank += skill.Cost;
             }
 
             this.Text = totalRank.ToString();
+
         }
+      
     }
 }

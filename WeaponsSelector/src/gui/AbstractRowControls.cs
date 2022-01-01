@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace WeaponsForm
 {
-    public class AbstractRowControls
+    public abstract class AbstractRowControls
     {
         public AbstractRowControls(TableLayoutPanel skillTableLayoutPanel)
         {

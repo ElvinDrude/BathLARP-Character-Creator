@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using WeaponsSelector;
 using WeaponsForm.Skills;
 using WeaponsSelector.src.gui;
+using WeaponsForm.character.record;
 
 namespace WeaponsForm
 {
@@ -75,7 +76,8 @@ namespace WeaponsForm
 
             skillTableLayoutPanel.Controls.Add(SkillCostTextBox, 2, skillTableLayoutPanel.RowCount);
 
-            (SkillCostTextBox.FindForm() as WeaponsForm).RankTextBox.RegisterRankCostTextBox(SkillCostTextBox);
+            //(SkillCostTextBox.FindForm() as WeaponsForm).RankTextBox.RegisterRankCostTextBox(SkillCostTextBox);
+
 
             //TODO; Remove this, as skill level combo box is now a placeholder
             //SkillLevelControl.SelectedValueChanged += SkillSkillLevel_SelectedValueChanged;
@@ -107,14 +109,6 @@ namespace WeaponsForm
             return (SkillLevelControl.FindForm() as WeaponsForm).JsonSkillReader.GetSkillType(SkillCategoryIdentifier, skillType);
         }
 
-        //internal void PopulateValidSkills(SkillType type)
-        //{
-        //    SkillLevelControl.Items.Clear();
-        //    SkillLevelControl.Items.AddRange(type.GetValidSkillLevels());
-        //    SkillLevelControl.SelectedIndex = 0;
-        //}
-
-
         private void SkillType_SelectedValueChanged(object sender, EventArgs e)
         {
             //TODO: Extra check for whether the name matches the pattern we expect?
@@ -138,22 +132,11 @@ namespace WeaponsForm
                     parent.Controls.Remove(SkillLevelControl);
 
                     SkillLevelControl = SkillLevelControlFactory.CreateNewSkillLevelControl(currType);
-                    //(newSkillLevelComboBox as ComboBox).SelectedValueChanged += SkillSkillLevel_SelectedValueChanged;
                     (SkillLevelControl as ISkillLevelControl).ValueChanged += SkillSkillLevel_SelectedValueChanged;
 
                     parent.Controls.Add(SkillLevelControl, 1, parent.RowCount);
                     parent.ResumeLayout(true);
 
-
-                    //if (currType.PurchaseType == PurchaseType.Levels)
-                    //{
-                    //    (SkillTypeComboBox.Tag as SkillRowControls).PopulateValidSkills(currType);
-                    //}
-                    //else
-                    //{
-                    //    weaponRowControls.SkillLevelComboBox.Parent.Controls.Remove(weaponRowControls.SkillLevelComboBox);
-                    //}
-                    //weaponRowControls.SkillLevelComboBox.Enabled = true;
                 }
             }
         }
@@ -163,27 +146,12 @@ namespace WeaponsForm
             long skillCost = (SkillLevelControl as ISkillLevelControl).GetSkillLevelCost();
             SkillCostTextBox.Text = skillCost.ToString();
 
+            var record = CreateRecord(skillCost);
 
-
-            //TODO: Extra check for whether the name matches the pattern we expect?
-            //if (sender is ComboBox)
-            //{
-            //    ComboBox skillComboBox = sender as ComboBox;
-
-            //    SkillRowControls skillRowControl = skillComboBox.Tag as SkillRowControls;
-            //    var SkillTypeComboBox = skillRowControl.SkillTypeComboBox;
-
-            //    var currType = GetSkillType((string)SkillTypeComboBox.SelectedItem);
-
-            //    TextBox weaponCostTextBox = skillRowControl.SkillCostTextBox;
-
-            //    long totalCost = currType.GetSkillLevelCost((string)skillComboBox.SelectedItem);
-
-            //    weaponCostTextBox.Text = totalCost.ToString();
-
-
-            //}
+            (SkillCostTextBox.FindForm() as WeaponsForm).SkillsList.Add(record);
         }
+
+        protected abstract SkillRecord CreateRecord(long skillCost);
 
     }
 }

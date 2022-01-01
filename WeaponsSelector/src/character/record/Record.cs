@@ -6,40 +6,64 @@ using System.Threading.Tasks;
 using WeaponsForm;
 using WeaponsForm.Skills;
 
-namespace WeaponsSelector.src.character.record
+namespace WeaponsForm.character.record
 {
-    abstract class Record
+    public class SkillRecord
     {
-
-
-
-    }
-
-    class GuildRecord : Record
-    {
-        public string Guild { get; set; }
-
-        GuildRecord(string GuildName)
-        {
-            Guild = GuildName;
-        }
-    }
-
-    abstract class SkillRecord : Record
-    {
-        public PurchaseType PurchaseType { get; set; }
-        SkillRecord(PurchaseType type)
-        {
-            PurchaseType = type;
-        }
-
         /// <summary>
-        /// Returns the cost of the current skill, including any modifiers e.g. guild bonuses
+        /// The cost, in character points, of this skill
         /// </summary>
-        /// <returns></returns>
-        public abstract int GetCost();
+        public long Cost;
+
+        public SkillRecord(long cost)
+        {
+            Cost = cost;
+        }
     }
 
+    /// <summary>
+    /// Class for any skill that just needs a cost and a simple string display
+    /// </summary>
+    public class StringSkillRecord : SkillRecord
+    {
+        public string DisplayString { get; }
+        public StringSkillRecord(long cost, string displayString) : base(cost)
+        {
+            DisplayString = displayString;
+        }
+    }
 
+    public class CastingRecord : StringSkillRecord
+    {
+        public CastingRecord(long cost, string displayString) : base(cost, displayString)
+        {
+        }
+    }
+
+    public class MagicRecord : StringSkillRecord
+    {
+        public MagicRecord(long cost, string displayString) : base(cost, displayString)
+        {
+        }
+    }
+
+    public class ManaRecord : SkillRecord
+    {
+        public long BoughtMana { get; }
+        public ManaRecord(long cost, long boughtMana) : base(cost)
+        {
+            BoughtMana = boughtMana;
+        }
+    }
+
+    public class ArmourRecord : SkillRecord
+    {
+        public int ArmourAmount { get; }
+        public ArmourRecord(long cost, int armourAmount) : base(cost)
+        {
+            ArmourAmount = armourAmount;
+        }
+
+    }
 
 }

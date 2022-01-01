@@ -6,11 +6,14 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Collections.ObjectModel;
 using System.Windows.Forms;
 using WeaponsSelector;
 using WeaponsSelector.src.gui;
 using WeaponsForm.Skills;
 using WeaponsForm.Spells;
+using WeaponsForm.character.record;
+using WeaponsSelector.src.gui.components;
 
 namespace WeaponsForm
 {
@@ -34,6 +37,8 @@ namespace WeaponsForm
 
         public JsonMiracleReader JsonMiracleReader { get; }
 
+        public ObservableCollection<SkillRecord> SkillsList { get; }
+
         public WeaponsForm()
         {
             //Top level form setup
@@ -45,6 +50,8 @@ namespace WeaponsForm
             JsonSkillReader = new JsonSkillReader();
             JsonSpellReader = new JsonSpellReader();
             JsonMiracleReader = new JsonMiracleReader();
+
+            SkillsList = new ObservableCollection<SkillRecord>();
 
             this.SuspendLayout();
 
@@ -59,66 +66,18 @@ namespace WeaponsForm
             this.Controls.Add(mainFlowLayoutPanel);
 
 
-            CreateHeaderFlowLayoutPanel(mainFlowLayoutPanel);
+            CreateHeader(mainFlowLayoutPanel);
 
-            var skillsFlowLayoutPanel = new FlowLayoutPanel
-            {
-                Anchor = AnchorStyles.Left,
-                Dock = DockStyle.Left,
-                FlowDirection = FlowDirection.TopDown,
-                AutoSize = true,
-                AutoSizeMode = AutoSizeMode.GrowAndShrink,
-                //Location = new Point(0, headerFlowLayoutPanel.Height),
-                BorderStyle = BorderStyle.FixedSingle,
-            };
-
-            skillsFlowLayoutPanel.SuspendLayout();
-            mainFlowLayoutPanel.Controls.Add(skillsFlowLayoutPanel);
-
-            new WeaponGroupBoxWrapper(skillsFlowLayoutPanel);
-            new ArmourGroupBoxWrapper(skillsFlowLayoutPanel);
-
-            skillsFlowLayoutPanel.ResumeLayout(false);
-            skillsFlowLayoutPanel.PerformLayout();
-
-            new PhysicalMentalGroupBox(skillsFlowLayoutPanel);
-
-            new MedicalGroupBox(skillsFlowLayoutPanel);
-
-            new MagicGroupBox(skillsFlowLayoutPanel);
-
-            new SpellsGroupBox(skillsFlowLayoutPanel);
-
-            new MiraclesGroupBox(skillsFlowLayoutPanel);
-
-
-            //var outputFlowLayoutPanel = new FlowLayoutPanel
-            //{
-            //    Dock = DockStyle.Right,
-            //    Anchor = AnchorStyles.Right | AnchorStyles.Top,
-            //    FlowDirection = FlowDirection.TopDown,
-            //    AutoSize = true,
-            //    AutoSizeMode = AutoSizeMode.GrowAndShrink,
-            //};
-            //this.Controls.Add(outputFlowLayoutPanel);
-
-
-            //var outputTextBox = new TextBox
-            //{
-            //    AutoSize = true,
-            //    Multiline = true,
-            //    ScrollBars = ScrollBars.Both,
-
-            //};
-            //outputFlowLayoutPanel.Controls.Add(outputTextBox);
-
+            CreateBody(mainFlowLayoutPanel);
 
             this.ResumeLayout();
         }
 
 
-        private void CreateHeaderFlowLayoutPanel(FlowLayoutPanel mainFlowLayoutPanel)
+        private void CreateHeader(FlowLayoutPanel mainFlowLayoutPanel)
         {
+            /* The header should span the full width of the Form, and contains
+             * the rank textbox as well as a place to put save/load buttons in the future*/
             headerFlowLayoutPanel = new FlowLayoutPanel
             {
                 Dock = DockStyle.Top,
@@ -129,6 +88,8 @@ namespace WeaponsForm
                 BorderStyle = BorderStyle.FixedSingle,
                 Width = this.Width,
             };
+            mainFlowLayoutPanel.Controls.Add(headerFlowLayoutPanel);
+
             headerFlowLayoutPanel.SuspendLayout();
 
             Label nameLabel = new Label
@@ -157,16 +118,94 @@ namespace WeaponsForm
             headerFlowLayoutPanel.Controls.Add(rankLabel);
 
 
-            RankTextBox = new RankTextBox
+            RankTextBox = new RankTextBox(headerFlowLayoutPanel)
             {
                 Anchor = AnchorStyles.Top,
             };
             headerFlowLayoutPanel.Controls.Add(RankTextBox);
 
-            mainFlowLayoutPanel.Controls.Add(headerFlowLayoutPanel);
+            
 
             headerFlowLayoutPanel.ResumeLayout(false);
             headerFlowLayoutPanel.PerformLayout();
+        }
+
+        private void CreateBody(FlowLayoutPanel mainFlowLayoutPanel)
+        {
+            /* The body contains the skills selection along with the output character sheet */
+
+            var bodyFlowLayoutPanel = new FlowLayoutPanel
+            {
+                Anchor = AnchorStyles.Left | AnchorStyles.Right,
+                Dock = DockStyle.Top,
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+            };
+            mainFlowLayoutPanel.Controls.Add(bodyFlowLayoutPanel);
+
+            CreateSkills(bodyFlowLayoutPanel);
+
+            CreateCharacterSheet(bodyFlowLayoutPanel.Controls);
+        }
+
+        private static void CreateSkills(FlowLayoutPanel bodyFlowLayoutPanel)
+        {
+            var skillsFlowLayoutPanel = new FlowLayoutPanel
+            {
+                Anchor = AnchorStyles.Left,
+                Dock = DockStyle.Left,
+                FlowDirection = FlowDirection.TopDown,
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                BorderStyle = BorderStyle.FixedSingle,
+            };
+
+            skillsFlowLayoutPanel.SuspendLayout();
+            bodyFlowLayoutPanel.Controls.Add(skillsFlowLayoutPanel);
+
+            new WeaponGroupBoxWrapper(skillsFlowLayoutPanel);
+            new ArmourGroupBoxWrapper(skillsFlowLayoutPanel);
+
+            skillsFlowLayoutPanel.ResumeLayout(false);
+            skillsFlowLayoutPanel.PerformLayout();
+
+            new PhysicalMentalGroupBox(skillsFlowLayoutPanel);
+
+            new MedicalGroupBox(skillsFlowLayoutPanel);
+
+            new MagicGroupBox(skillsFlowLayoutPanel);
+
+            new SpellsGroupBox(skillsFlowLayoutPanel);
+
+            new MiraclesGroupBox(skillsFlowLayoutPanel);
+        }
+
+
+        private void CreateCharacterSheet(Control.ControlCollection parent)
+        {
+            var outputFlowLayoutPanel = new FlowLayoutPanel
+            {
+                Dock = DockStyle.Right,
+                Anchor = AnchorStyles.Right | AnchorStyles.Top,
+                FlowDirection = FlowDirection.TopDown,
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                BorderStyle = BorderStyle.FixedSingle,
+            };
+            this.Controls.Add(outputFlowLayoutPanel);
+
+
+            var characterSheetTextBox = new CharacterSheetTextBox(SkillsList)
+            {
+                AutoSize = true,
+                Multiline = true,
+                Height = 200,
+                ScrollBars = ScrollBars.Both,
+
+            };
+            outputFlowLayoutPanel.Controls.Add(characterSheetTextBox);
+
+            parent.Add(outputFlowLayoutPanel);
         }
 
         [STAThread]

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using WeaponsSelector;
 using WeaponsForm.Skills;
+using WeaponsForm.character.record;
 
 namespace WeaponsForm
 {
@@ -14,6 +15,9 @@ namespace WeaponsForm
         {
         }
 
-
+        protected override SkillRecord CreateRecord(long skillCost)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

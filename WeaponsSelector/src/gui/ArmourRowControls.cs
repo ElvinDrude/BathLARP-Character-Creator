@@ -7,13 +7,111 @@ using System.Windows.Forms;
 using WeaponsForm;
 using WeaponsSelector;
 using WeaponsForm.Skills;
+using WeaponsForm.character.record;
 
 namespace WeaponsForm
 {
     public class ArmourRowControls : SkillRowControls
     {
+
         public ArmourRowControls(TableLayoutPanel skillTableLayoutPanel) : base(skillTableLayoutPanel, Constants.Armour)
         {
+        }
+
+        protected override SkillRecord CreateRecord(long skillCost)
+        {
+            string skillType = (string)SkillTypeComboBox.SelectedItem;
+
+            if (skillType == "Combination")
+            {
+                //TODO: These inner if checks may not be necessary - this code should only execute 
+                // when both the type and level are active.
+                // +2 as Combination both removes the stacking penalty AND provides an extra armour
+                // TODO: Implement armour stacking penalty - probably just if ArmourRecords > 1 subtract 1...
+                if ((SkillLevelControl as CheckBox).Checked)
+                {
+                    return new ArmourRecord(skillCost, 2);
+                }
+                else
+                {
+                    return null;
+                }    
+            }
+            else if(skillType == "Enhanced Combination")
+            {
+                if ((SkillLevelControl as CheckBox).Checked)
+                {
+                    return new ArmourRecord(skillCost, 1);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+                        
+            int baseArmour = 0;
+            
+            switch(skillType)
+            {
+                //TODO: Skills JSON needs to split Furs and Leather into separate entries
+                case "Furs":
+                    baseArmour = 1;
+                    break;
+                case "Leather":
+                    baseArmour = 2;
+                    break;
+                case "Studded Leather":
+                    baseArmour = 3;
+                    break;
+                case "Chain":
+                    baseArmour = 4;
+                    break;
+                case "Banded":
+                    baseArmour = 5;
+                    break;
+                case "Plate":
+                    baseArmour = 6;
+                    break;
+
+                default:
+                    throw new Exception("Unrecognised skillType '" + skillType + "'");
+            }
+
+            string skillLevel = (string)(SkillLevelControl as ComboBox).SelectedItem;
+            int skillModifier = 0;
+
+            switch(skillLevel)
+            {
+                case "None":
+                    return null;
+                case "Proficiency":
+                    break; // Prof gives no extra armour ontop of the base
+                case "Specialisation":
+                    skillModifier = 1;
+                    break;
+                case "Expertise":
+                    skillModifier = 2;
+                    break;
+                case "Mastery":
+                    skillModifier = 3;
+                    break;
+                case "Advanced Mastery":
+                    skillModifier = 4;
+                    break;
+                case "Legendary Mastery":
+                    skillModifier = 5;
+                    break;
+                default:
+                    throw new Exception("Unrecognised skillLevel '" + skillLevel + "'");
+            }
+
+            // Rule of double means skill cannot add more than base already provided
+            if (skillModifier > baseArmour)
+            {
+                skillModifier = baseArmour;
+            }
+
+            return new ArmourRecord(skillCost, baseArmour + skillModifier);
         }
     }
 }

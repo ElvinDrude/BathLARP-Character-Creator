@@ -47,7 +47,6 @@ namespace WeaponsSelector.src.gui
                 Dock = DockStyle.Fill,
                 ColumnCount = 4, // Spells and Miracles use 4 columns, other sections use 3. 
                                  // The unused column seems to have no problematic effects, if we never add anything to it it renders at 0 width
-                //Name = "UniqueStrForNow", //TODO: This used to be a string defined in WeaponsForm, and accessed in handlers...
                 AutoSize = true,
                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
             };

@@ -27,6 +27,9 @@ namespace WeaponsForm
 
         public TextBox SkillCostTextBox { get; }
 
+        // Track the row index of this item inside the parent table. Used as part of a unique identifier.
+        protected int RowCount;
+
         /// <summary>
         /// Either the Spells or Miracles reader
         /// </summary>
@@ -37,6 +40,7 @@ namespace WeaponsForm
             JsonCastingReader = jsonReader;
 
             skillTableLayoutPanel.RowCount += 1;
+            RowCount = skillTableLayoutPanel.RowCount;
 
             SpellSchoolComboBox = new ComboBox
             {
@@ -55,7 +59,7 @@ namespace WeaponsForm
 
             SpellSchoolComboBox.SelectedValueChanged += SpellSchool_SelectedValueChanged;
 
-            skillTableLayoutPanel.Controls.Add(SpellSchoolComboBox, 0, skillTableLayoutPanel.RowCount);
+            skillTableLayoutPanel.Controls.Add(SpellSchoolComboBox, 0, RowCount);
 
             SpellComboBox = new ComboBox
             {
@@ -67,7 +71,7 @@ namespace WeaponsForm
 
             SpellComboBox.SelectedValueChanged += Spell_SelectedValueChanged;
 
-            skillTableLayoutPanel.Controls.Add(SpellComboBox, 1, skillTableLayoutPanel.RowCount);
+            skillTableLayoutPanel.Controls.Add(SpellComboBox, 1, RowCount);
 
 
 
@@ -82,7 +86,7 @@ namespace WeaponsForm
 
             SpellLevelComboBox.SelectedValueChanged += SpellLevel_SelectedValueChanged;
 
-            skillTableLayoutPanel.Controls.Add(SpellLevelComboBox, 2, skillTableLayoutPanel.RowCount);
+            skillTableLayoutPanel.Controls.Add(SpellLevelComboBox, 2, RowCount);
 
 
             SkillCostTextBox = new TextBox
@@ -94,7 +98,7 @@ namespace WeaponsForm
                 Tag = this,
             };
 
-            skillTableLayoutPanel.Controls.Add(SkillCostTextBox, 3, skillTableLayoutPanel.RowCount);
+            skillTableLayoutPanel.Controls.Add(SkillCostTextBox, 3, RowCount);
 
             //(SkillCostTextBox.FindForm() as WeaponsForm).RankTextBox.RegisterRankCostTextBox(SkillCostTextBox);
         }
@@ -167,7 +171,12 @@ namespace WeaponsForm
 
             var record = SkillRecordFactory.createSkillRecord(runningCost, this, displayString);
 
-            (SkillCostTextBox.FindForm() as WeaponsForm).SkillsList.Add(record);
+            var skillsDict = (SkillCostTextBox.FindForm() as WeaponsForm).SkillsDict;
+
+            // skillName isn't the same format as for SkillRowControls items, but it's unique enough
+            var recordName = skillName + RowCount;
+
+            skillsDict.Add(recordName, record);
 
         }
     }

@@ -14,6 +14,7 @@ using WeaponsForm.Skills;
 using WeaponsForm.Spells;
 using WeaponsForm.character.record;
 using WeaponsSelector.src.gui.components;
+using System.Collections.Concurrent;
 
 namespace WeaponsForm
 {
@@ -37,7 +38,7 @@ namespace WeaponsForm
 
         public JsonMiracleReader JsonMiracleReader { get; }
 
-        public ObservableCollection<SkillRecord> SkillsList { get; }
+        public ObservableConcurrentDictionary<string, SkillRecord> SkillsDict { get; }
 
         public WeaponsForm()
         {
@@ -51,7 +52,7 @@ namespace WeaponsForm
             JsonSpellReader = new JsonSpellReader();
             JsonMiracleReader = new JsonMiracleReader();
 
-            SkillsList = new ObservableCollection<SkillRecord>();
+            SkillsDict = new ObservableConcurrentDictionary<string, SkillRecord>();
 
             this.SuspendLayout();
 
@@ -195,7 +196,7 @@ namespace WeaponsForm
             this.Controls.Add(outputFlowLayoutPanel);
 
 
-            var characterSheetTextBox = new CharacterSheetTextBox(SkillsList)
+            var characterSheetTextBox = new CharacterSheetTextBox(SkillsDict)
             {
                 AutoSize = true,
                 Multiline = true,

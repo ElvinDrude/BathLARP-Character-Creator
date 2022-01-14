@@ -18,8 +18,17 @@ namespace WeaponsForm
         //This one isn't displayed to the user but is in the JSON file
         public const string Special = "Special";
 
-        //Constants below here are not used in JSON, only as user display strings.
+        //These are not used in JSON, only as user display strings.
         public const string Spells = "Spells";
         public const string Miracles = "Miracles";
+
+        //Skill levels common to most chains
+        public const string None = "None";
+        public const string Proficiency = "Proficiency";
+        public const string Specialisation = "Specialisation";
+        public const string Expertise = "Expertise";
+        public const string Mastery = "Mastery";
+        public const string AdvancedMastery = "Advanced Mastery";
+        public const string LegendaryMastery = "Legendary Mastery";
     }
 }

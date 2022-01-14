@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -13,26 +14,27 @@ namespace WeaponsSelector.src.gui.components
 {
     class CharacterSheetTextBox : TextBox
     {
-        public CharacterSheetTextBox(ObservableCollection<SkillRecord> skillsList) : base()
+        //TODO: Go over what part of the ObserveableConcurrentDictionary I actually need and use that - probably jus the ICollection interface
+        public CharacterSheetTextBox(ObservableConcurrentDictionary<string, SkillRecord> skillsDict) : base()
         {
-            skillsList.CollectionChanged += CharacterSheetTextBox_SkillsListChanged;
-
-
+            skillsDict.CollectionChanged += CharacterSheetTextBox_SkillsListChanged;
         }
 
         private void CharacterSheetTextBox_SkillsListChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             this.Text = "";
 
-            var skillsList = (sender as ObservableCollection<SkillRecord>);
+            var skillsDict = (sender as ObservableConcurrentDictionary<string, SkillRecord>);
 
-            CreateArmourText(skillsList);
+            CreateArmourText(skillsDict);
+
+            CreateWeaponText(skillsDict);
 
         }
 
-        private void CreateArmourText(ObservableCollection<SkillRecord> skillsList)
+        private void CreateArmourText(ObservableConcurrentDictionary<string, SkillRecord> skillsDict)
         {
-            var list = skillsList.OfType<ArmourRecord>().ToList();
+            var list = skillsDict.Values.OfType<ArmourRecord>().ToList();
 
             int totalArmour = 0;
 
@@ -49,7 +51,28 @@ namespace WeaponsSelector.src.gui.components
             }
 
 
-            this.Text += "Armour: " + totalArmour + "\n";
+            this.Text += "Armour: " + totalArmour + "\r\n";
+        }
+
+
+        private void CreateWeaponText(ObservableConcurrentDictionary<string, SkillRecord> skillsDict)
+        {
+            var weaponsList = skillsDict.Values.OfType<WeaponRecord>().ToList();
+
+            //TODO: Get Strength record (and work out how to differentiate 1H and 2H...
+
+            foreach(var weapon in weaponsList)
+            {
+                this.Text += weapon.WeaponType + " " + weapon.WeaponDamage + "\r\n";
+            }
+
+            //TODO: Test all the shield stuff, there's none in the Skills JSON at time of writing
+            var shieldList = skillsDict.Values.OfType<ShieldRecord>().ToList();
+
+            foreach(var shield in shieldList)
+            {
+                this.Text += shield.ShieldType + " breaks on " + shield.ShieldBreak + "\r\n";
+            }
         }
     }
 }

@@ -20,20 +20,28 @@
                             "Cost": 0
                         },
                         {
-                            "Level": "Prof",
+                            "Level": "Proficiency",
                             "Cost": 2
                         },
                         {
-                            "Level": "Spec",
+                            "Level": "Specialisation",
                             "Cost": 4
                         },
                         {
-                            "Level": "Exp",
+                            "Level": "Expertise",
                             "Cost": 8
                         },
                         {
                             "Level": "Mastery",
                             "Cost": 16
+                        },
+                        {
+                            "Level": "Advanced Mastery",
+                            "Cost": 32
+                        },
+                        {
+                            "Level": "Legendary Mastery",
+                            "Cost": 64
                         }
                     ]
                 },
@@ -46,20 +54,28 @@
                             "Cost": 0
                         },
                         {
-                            "Level": "Prof",
+                            "Level": "Proficiency",
                             "Cost": 3
                         },
                         {
-                            "Level": "Spec",
+                            "Level": "Specialisation",
                             "Cost": 6
                         },
                         {
-                            "Level": "Exp",
+                            "Level": "Expertise",
                             "Cost": 12
                         },
                         {
                             "Level": "Mastery",
                             "Cost": 24
+                        },
+                        {
+                            "Level": "Advanced Mastery",
+                            "Cost": 48
+                        },
+                        {
+                            "Level": "Legendary Mastery",
+                            "Cost": 96
                         }
                     ]
                 }

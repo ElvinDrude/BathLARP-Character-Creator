@@ -20,17 +20,20 @@ namespace WeaponsForm
         // A string that identifies the subclass's actual type (weapons, armour, etc.).
         protected string SkillCategoryIdentifier;
 
+        // Track the row index of this item inside the parent table. Used as part of a unique identifier.
+        protected int RowCount;
+
         /// <summary>
         /// Create a new set of components defining a skill, and make them a new row at the bottom of
         /// the given TableLayoutPanel
         /// </summary>
-        /// <param name="rankTextBox">The global rank text box that updates with all rank information</param>
         /// <param name="skillTableLayoutPanel">The table to which the new weapons controls will be added. Must already be added to the parent form.</param>
         public SkillRowControls(TableLayoutPanel skillTableLayoutPanel, string skillCategoryIdentifier) : base(skillTableLayoutPanel)
         {
             SkillCategoryIdentifier = skillCategoryIdentifier;
 
             skillTableLayoutPanel.RowCount += 1;
+            RowCount = skillTableLayoutPanel.RowCount;
 
             SkillTypeComboBox = new ComboBox
             {
@@ -49,7 +52,7 @@ namespace WeaponsForm
 
             SkillTypeComboBox.SelectedValueChanged += SkillType_SelectedValueChanged;
 
-            skillTableLayoutPanel.Controls.Add(SkillTypeComboBox, 0, skillTableLayoutPanel.RowCount);
+            skillTableLayoutPanel.Controls.Add(SkillTypeComboBox, 0, RowCount);
 
             //This is basically a placeholder, to be replaced later with the right kind of control for the selected skill.
             //All this really serves as is a spacer. 
@@ -63,7 +66,7 @@ namespace WeaponsForm
                 Tag = this,
             };
 
-            skillTableLayoutPanel.Controls.Add(SkillLevelControl, 1, skillTableLayoutPanel.RowCount);
+            skillTableLayoutPanel.Controls.Add(SkillLevelControl, 1, RowCount);
 
             SkillCostTextBox = new TextBox
             {
@@ -74,7 +77,7 @@ namespace WeaponsForm
                 Tag = this,
             };
 
-            skillTableLayoutPanel.Controls.Add(SkillCostTextBox, 2, skillTableLayoutPanel.RowCount);
+            skillTableLayoutPanel.Controls.Add(SkillCostTextBox, 2, RowCount);
 
             //(SkillCostTextBox.FindForm() as WeaponsForm).RankTextBox.RegisterRankCostTextBox(SkillCostTextBox);
 
@@ -148,7 +151,11 @@ namespace WeaponsForm
 
             var record = CreateRecord(skillCost);
 
-            (SkillCostTextBox.FindForm() as WeaponsForm).SkillsList.Add(record);
+            var skillsDict = (SkillCostTextBox.FindForm() as WeaponsForm).SkillsDict;
+
+            var recordName = SkillCategoryIdentifier + RowCount;
+
+            skillsDict.Add(recordName, record);
         }
 
         protected abstract SkillRecord CreateRecord(long skillCost);

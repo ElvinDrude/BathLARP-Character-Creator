@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -19,7 +20,7 @@ namespace WeaponsForm
         //TODO: Its silly to pass the panel here. Just pass the list!
         public RankTextBox(FlowLayoutPanel headerFlowLayoutPanel) : base()
         {
-            (headerFlowLayoutPanel.FindForm() as WeaponsForm).SkillsList.CollectionChanged += RankTextBox_SkillsListChanged;
+            (headerFlowLayoutPanel.FindForm() as WeaponsForm).SkillsDict.CollectionChanged += RankTextBox_SkillsListChanged;
         }
 
 
@@ -33,10 +34,10 @@ namespace WeaponsForm
         private void RankTextBox_SkillsListChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             long totalRank = 0;
-            var skillsList = (sender as ObservableCollection<SkillRecord>);
+            var skillsCollection = (sender as ObservableConcurrentDictionary<string, SkillRecord>);
 
             // The list may have null entries, filter them before costing
-            var filteredList = skillsList.Where(x => x != null);
+            var filteredList = skillsCollection.Values.Where(x => x != null);
 
             foreach (SkillRecord skill in filteredList)
             {

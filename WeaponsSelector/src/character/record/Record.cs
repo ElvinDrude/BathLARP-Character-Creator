@@ -66,4 +66,28 @@ namespace WeaponsForm.character.record
 
     }
 
+    public class ShieldRecord : SkillRecord
+    {
+        public int ShieldBreak { get; }
+        public string ShieldType { get; }
+
+        public ShieldRecord(long cost, int shieldBreak, string shieldType) : base(cost)
+        {
+            ShieldBreak = shieldBreak;
+            ShieldType = shieldType;
+        }
+    }
+
+    public class WeaponRecord : SkillRecord
+    {
+        public int WeaponDamage { get; }
+        public string WeaponType { get; }
+
+        public WeaponRecord(long cost, int weaponDamage, string weaponType) : base(cost)
+        {
+            WeaponDamage = weaponDamage;
+            WeaponType = weaponType;
+        }
+    }
+
 }

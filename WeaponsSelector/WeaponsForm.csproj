@@ -110,6 +110,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\dependencies\ObservableConcurrentDictionary.cs" />
     <Compile Include="src\gui\AbstractRowControls.cs" />
     <Compile Include="src\gui\components\CharacterSheetTextBox.cs">
       <SubType>Component</SubType>

@@ -27,7 +27,6 @@ namespace WeaponsForm
                 //TODO: These inner if checks may not be necessary - this code should only execute 
                 // when both the type and level are active.
                 // +2 as Combination both removes the stacking penalty AND provides an extra armour
-                // TODO: Implement armour stacking penalty - probably just if ArmourRecords > 1 subtract 1...
                 if ((SkillLevelControl as CheckBox).Checked)
                 {
                     return new ArmourRecord(skillCost, 2);
@@ -82,23 +81,23 @@ namespace WeaponsForm
 
             switch(skillLevel)
             {
-                case "None":
+                case Constants.None:
                     return null;
-                case "Proficiency":
+                case Constants.Proficiency:
                     break; // Prof gives no extra armour ontop of the base
-                case "Specialisation":
+                case Constants.Specialisation:
                     skillModifier = 1;
                     break;
-                case "Expertise":
+                case Constants.Expertise:
                     skillModifier = 2;
                     break;
-                case "Mastery":
+                case Constants.Mastery:
                     skillModifier = 3;
                     break;
-                case "Advanced Mastery":
+                case Constants.AdvancedMastery:
                     skillModifier = 4;
                     break;
-                case "Legendary Mastery":
+                case Constants.LegendaryMastery:
                     skillModifier = 5;
                     break;
                 default:

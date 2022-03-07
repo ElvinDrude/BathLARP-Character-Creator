@@ -155,7 +155,11 @@ namespace WeaponsForm
 
             var recordName = SkillCategoryIdentifier + RowCount;
 
+            // Can't replace a dict key in a single action, must remove and re-add
+            skillsDict.Remove(recordName);
+
             skillsDict.Add(recordName, record);
+
         }
 
         protected abstract SkillRecord CreateRecord(long skillCost);

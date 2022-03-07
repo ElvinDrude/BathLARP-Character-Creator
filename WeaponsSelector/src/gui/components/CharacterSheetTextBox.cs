@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WeaponsForm.character.record;
+using System.ComponentModel;
 
 namespace WeaponsSelector.src.gui.components
 {
@@ -20,7 +21,14 @@ namespace WeaponsSelector.src.gui.components
             skillsDict.CollectionChanged += CharacterSheetTextBox_SkillsListChanged;
         }
 
+
         private void CharacterSheetTextBox_SkillsListChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            // Note that this can get called twice - once for removal of key and once for adding new one. 
+            CreateText(sender);
+        }
+
+        private void CreateText(object sender)
         {
             this.Text = "";
 
@@ -29,7 +37,7 @@ namespace WeaponsSelector.src.gui.components
             CreateArmourText(skillsDict);
 
             CreateWeaponText(skillsDict);
-
+            return;
         }
 
         private void CreateArmourText(ObservableConcurrentDictionary<string, SkillRecord> skillsDict)

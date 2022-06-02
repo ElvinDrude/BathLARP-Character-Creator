@@ -53,6 +53,7 @@ namespace WeaponsForm
             switch(skillType)
             {
                 //TODO: Skills JSON needs to split Furs and Leather into separate entries
+                //TODO: Make enum for these strings?
                 case "Furs":
                     baseArmour = 1;
                     break;

@@ -23,6 +23,8 @@ namespace WeaponsForm
 
             int baseDamage = 0;
             string shieldType = null;
+            NumHands numHands = NumHands.OneHanded;
+
             switch(skillType)
             {
                 case "One Handed":
@@ -30,6 +32,7 @@ namespace WeaponsForm
                     break;
                 case "Two Handed":
                     baseDamage = 7;
+                    numHands = NumHands.TwoHanded;
                     break;
                 case "Fist":
                     baseDamage = 1;
@@ -42,20 +45,22 @@ namespace WeaponsForm
                     break;
                 case "Staff":
                     baseDamage = 6;
+                    numHands = NumHands.TwoHanded;
                     break;
                 case "Throwing":
                     baseDamage = 2;
                     break;
                 case "Longbow":
                     baseDamage = 6;
+                    numHands = NumHands.TwoHanded;
                     break;
                 case "One Hand Crossbow":
                     baseDamage = 4;
                     break;
                 case "Two Hand Crossbow":
                     baseDamage = 7;
+                    numHands = NumHands.TwoHanded;
                     break;
-
                 case "Small Shield":
                     shieldType = "Small";
                     break;
@@ -132,7 +137,7 @@ namespace WeaponsForm
                     throw new Exception("Unrecognised skillLevel '" + skillLevel + "'");
             }
 
-            return new WeaponRecord(skillCost, baseDamage + skillModifier, skillType);
+            return new WeaponRecord(skillCost, baseDamage, skillModifier, numHands, skillType);
         }
     }
 }

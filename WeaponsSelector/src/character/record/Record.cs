@@ -78,16 +78,85 @@ namespace WeaponsForm.character.record
         }
     }
 
+    public enum NumHands
+    {
+        OneHanded,
+        TwoHanded
+    }
+
+    public enum StrengthLevel
+    {
+        None,
+        Single = 1, // Specified so that we can use numeric value for maths operations
+        Double,
+        Triple,
+        Quadruple,
+        Quintuple,
+        Sextuple,
+        Septuple,
+        Octuple,
+        Nonuple,
+        Dectuple
+    }
+
     public class WeaponRecord : SkillRecord
     {
-        public int WeaponDamage { get; }
         public string WeaponType { get; }
+        private int BaseDamage { get; }
+        private int SkillDamage { get; }
 
-        public WeaponRecord(long cost, int weaponDamage, string weaponType) : base(cost)
+        private NumHands NumHands { get; }
+
+        public WeaponRecord(long cost, int baseDamage, int skillModifier, NumHands numHands, string weaponType) : base(cost)
         {
-            WeaponDamage = weaponDamage;
             WeaponType = weaponType;
+            BaseDamage = baseDamage;
+            SkillDamage = skillModifier;
+            NumHands = numHands;
+        }
+
+        public int GetDamage(StrengthLevel strLevel)
+        {
+            int damage = BaseDamage + SkillDamage;
+
+            // Strength may only add damage up (and including) to the base damage
+            if ((int)strLevel > BaseDamage)
+            {
+                strLevel = (StrengthLevel)BaseDamage;
+            }
+
+            if (NumHands == NumHands.OneHanded)
+            {
+                damage += (int)strLevel;
+            }
+            else
+            {
+                damage += 2 * (int)strLevel;
+            }
+
+            return damage;
         }
     }
+
+    public class StrengthRecord : SkillRecord
+    {
+        public StrengthLevel StrengthLevel { get; }
+
+    public StrengthRecord(long cost, string strengthLevel) : base(cost)
+    {
+            var strLevel = StrengthLevel.None;
+            var success = Enum.TryParse<StrengthLevel>(strengthLevel, out strLevel);
+            if (success)
+            {
+                StrengthLevel = strLevel;
+            }
+            else
+            {
+                throw new Exception("Unrecognised Strength value " + strengthLevel);
+            }
+
+
+    }
+}
 
 }

@@ -17,7 +17,18 @@ namespace WeaponsForm
 
         protected override SkillRecord CreateRecord(long skillCost)
         {
+            string skillType = (string)SkillTypeComboBox.SelectedItem;
+
+            if (skillType == "Strength")
+            {
+                return new StrengthRecord(skillCost, (string)(SkillLevelControl as ComboBox).SelectedItem);
+            }
+            else
+            {
             throw new NotImplementedException();
+
+            }
+
         }
     }
 }

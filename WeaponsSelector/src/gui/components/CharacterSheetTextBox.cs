@@ -46,14 +46,14 @@ namespace WeaponsSelector.src.gui.components
 
             int totalArmour = 0;
 
-            if(list.Count > 1)
+            if (list.Count > 1)
             {
                 // Stacking two layers of armour gives a -1 penalty.
                 // Note this isn't perfect logic due to how Combination works...
                 totalArmour -= 1;
             }
 
-            foreach(var record in list)
+            foreach (var record in list)
             {
                 totalArmour += record.ArmourAmount;
             }
@@ -65,19 +65,26 @@ namespace WeaponsSelector.src.gui.components
 
         private void CreateWeaponText(ObservableConcurrentDictionary<string, SkillRecord> skillsDict)
         {
+            StrengthLevel strLevel = StrengthLevel.None;
+
+
+            var list = skillsDict.Values.OfType<StrengthRecord>().ToList();
+            if (list.Count > 0)
+            {
+                strLevel = list.First().StrengthLevel;
+            }    
+
             var weaponsList = skillsDict.Values.OfType<WeaponRecord>().ToList();
 
-            //TODO: Get Strength record (and work out how to differentiate 1H and 2H...
-
-            foreach(var weapon in weaponsList)
+            foreach (var weapon in weaponsList)
             {
-                this.Text += weapon.WeaponType + " " + weapon.WeaponDamage + "\r\n";
+                this.Text += weapon.WeaponType + " " + weapon.GetDamage(strLevel) + "\r\n";
             }
 
             //TODO: Test all the shield stuff, there's none in the Skills JSON at time of writing
             var shieldList = skillsDict.Values.OfType<ShieldRecord>().ToList();
 
-            foreach(var shield in shieldList)
+            foreach (var shield in shieldList)
             {
                 this.Text += shield.ShieldType + " breaks on " + shield.ShieldBreak + "\r\n";
             }

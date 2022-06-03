@@ -109,8 +109,27 @@ namespace WeaponsForm
 
         public override long GetSkillLevelCost()
         {
-            //TODO: Work out how to properly deal with the ?. operators   
-            var thresholdIncrement = SkillType.Threshold.GetValueOrDefault();
+            //TODO: Work out how to properly deal with the ?. operators  
+            var form = FindForm() as WeaponsForm;
+            var race = form.JsonRaceReader.GetRaces()[form.RaceComboBox.SelectedIndex];
+
+            long thresholdIncrement;
+
+            switch (SkillType.Name)
+            {
+                case "Enhance Life":
+                    thresholdIncrement = race.Life.Threshold;
+                    break;
+                case "Enhance Mana":
+                    thresholdIncrement = race.Mana.Threshold;
+                    break;
+                case "Enhance Standing":
+                    thresholdIncrement = race.Standing.Threshold;
+                    break;
+                default:
+                    throw new Exception("Unrecognised SkillType.Name: " + SkillType.Name);
+            }
+            
             var startCost = SkillType.Cost;
 
             int currThreshold = 0;

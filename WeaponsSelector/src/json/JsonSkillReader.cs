@@ -108,6 +108,7 @@ namespace WeaponsForm.Skills
 
         /// <summary>
         /// If a field has BuyOnce == false, there will be a threshold value for how many times the skill can be bought before its cost increases. E.g. Enhance Life.
+        /// TODO: This needs to somehow tie in to the Races JSON as that's where the Threshold value actually exists
         /// </summary>
         [JsonProperty("Threshold", Required = Required.DisallowNull, NullValueHandling = NullValueHandling.Ignore)]
         public long? Threshold { get; set; }

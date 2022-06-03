@@ -37,8 +37,11 @@ namespace WeaponsSelector.src.gui.components
             CreateArmourText(skillsDict);
 
             CreateWeaponText(skillsDict);
+
+            CreatePhysicalMentalText(skillsDict);
             return;
         }
+
 
         private void CreateArmourText(ObservableConcurrentDictionary<string, SkillRecord> skillsDict)
         {
@@ -72,7 +75,7 @@ namespace WeaponsSelector.src.gui.components
             if (list.Count > 0)
             {
                 strLevel = list.First().StrengthLevel;
-            }    
+            }
 
             var weaponsList = skillsDict.Values.OfType<WeaponRecord>().ToList();
 
@@ -88,6 +91,18 @@ namespace WeaponsSelector.src.gui.components
             {
                 this.Text += shield.ShieldType + " breaks on " + shield.ShieldBreak + "\r\n";
             }
+        }
+        private void CreatePhysicalMentalText(ObservableConcurrentDictionary<string, SkillRecord> skillsDict)
+        {
+            var lifeRecordList = skillsDict.Values.OfType<EnhanceLifeRecord>().ToList();
+            var lifeBought = 0;
+            if (lifeRecordList.Count > 0)
+            {
+                lifeBought = lifeRecordList.First().LifeBought;
+            }
+            var form = (FindForm() as WeaponsForm.WeaponsForm);
+            this.Text += "Life: " + (form.JsonRaceReader.GetRaces()[form.RaceComboBox.SelectedIndex].Life.Base + lifeBought);
+
         }
     }
 }

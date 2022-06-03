@@ -142,8 +142,8 @@ namespace WeaponsForm.character.record
     {
         public StrengthLevel StrengthLevel { get; }
 
-    public StrengthRecord(long cost, string strengthLevel) : base(cost)
-    {
+        public StrengthRecord(long cost, string strengthLevel) : base(cost)
+        {
             var strLevel = StrengthLevel.None;
             var success = Enum.TryParse<StrengthLevel>(strengthLevel, out strLevel);
             if (success)
@@ -156,7 +156,19 @@ namespace WeaponsForm.character.record
             }
 
 
+        }
+
+
     }
-}
+
+    public class EnhanceLifeRecord : SkillRecord
+    {
+        public int LifeBought { get; }
+
+        public EnhanceLifeRecord(long cost, int lifeBought) : base(cost)
+        {
+            LifeBought = lifeBought;
+        }
+    }
 
 }

@@ -137,6 +137,7 @@
     <Compile Include="src\gui\SpellsRowControls.cs" />
     <Compile Include="src\gui\WeaponGroupBoxWrapper.cs" />
     <Compile Include="src\json\JsonCastingReader.cs" />
+    <Compile Include="src\json\JsonRaceReader.cs" />
     <Compile Include="src\json\JsonSkillReader.cs" />
     <Compile Include="src\gui\components\RankTextBox.cs">
       <SubType>Component</SubType>
@@ -156,6 +157,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="JSON\Miracles.json" />
+    <None Include="JSON\Races.json" />
     <None Include="JSON\Spells.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

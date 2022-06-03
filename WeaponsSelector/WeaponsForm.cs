@@ -15,6 +15,7 @@ using WeaponsForm.Spells;
 using WeaponsForm.character.record;
 using WeaponsSelector.src.gui.components;
 using System.Collections.Concurrent;
+using WeaponsForm.Races;
 
 namespace WeaponsForm
 {
@@ -28,6 +29,8 @@ namespace WeaponsForm
         //TODO: Re-work this to remove the need for set - currently used in CreateHeaderFlowLayoutPanel
         public RankTextBox RankTextBox { get; private set; }
 
+        public ComboBox RaceComboBox { get; private set; }
+
 
         /// <summary>
         /// The current version of the JSON skill costs that all parts of the application should read from
@@ -37,6 +40,8 @@ namespace WeaponsForm
         public JsonSpellReader JsonSpellReader { get; }
 
         public JsonMiracleReader JsonMiracleReader { get; }
+
+        public JsonRaceReader JsonRaceReader { get; }
 
         public ObservableConcurrentDictionary<string, SkillRecord> SkillsDict { get; }
 
@@ -51,6 +56,7 @@ namespace WeaponsForm
             JsonSkillReader = new JsonSkillReader();
             JsonSpellReader = new JsonSpellReader();
             JsonMiracleReader = new JsonMiracleReader();
+            JsonRaceReader = new JsonRaceReader();
 
             SkillsDict = new ObservableConcurrentDictionary<string, SkillRecord>();
 
@@ -92,6 +98,34 @@ namespace WeaponsForm
             mainFlowLayoutPanel.Controls.Add(headerFlowLayoutPanel);
 
             headerFlowLayoutPanel.SuspendLayout();
+
+            Label raceLabel = new Label
+            {
+                //Dock = DockStyle.Left,
+                Anchor = AnchorStyles.None,
+                Text = "Race:",
+                AutoSize = true,
+            };
+            headerFlowLayoutPanel.Controls.Add(raceLabel);
+
+            RaceComboBox = new ComboBox
+            {
+                Anchor = AnchorStyles.Top,
+                //Name = "SkillTypeComboBox#" + skillTableLayoutPanel.RowCount.ToString(),
+                MaximumSize = new Size(100, 20),
+                DropDownStyle = ComboBoxStyle.DropDownList,
+                Tag = this,
+            };
+
+            // Gather and list all possible skills in the combobox
+            var racesList = JsonRaceReader.GetRaces();
+            string[] racesStringList = racesList.ToArray().Select(race => race.RaceName).ToArray();
+            RaceComboBox.Items.AddRange(racesStringList);
+            RaceComboBox.SelectedIndex = 0;
+
+            headerFlowLayoutPanel.Controls.Add(RaceComboBox);
+
+
 
             Label nameLabel = new Label
             {

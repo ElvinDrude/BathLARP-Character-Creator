@@ -23,9 +23,13 @@ namespace WeaponsForm
             {
                 return new StrengthRecord(skillCost, (string)(SkillLevelControl as ComboBox).SelectedItem);
             }
+            else if (skillType == "Enhance Life")
+            {
+                return new EnhanceLifeRecord(skillCost, (int)(SkillLevelControl as SkillLevelThresholdNumericField).Value);
+            }
             else
             {
-            throw new NotImplementedException();
+                throw new NotImplementedException();
 
             }
 
